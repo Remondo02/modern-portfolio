@@ -9,5 +9,13 @@
         "./src/*"
       ]
     }
-  }
+  },
+  "include": [
+    "./src/env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "dist"
+  ],
 }
