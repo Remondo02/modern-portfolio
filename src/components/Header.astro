@@ -1,5 +1,7 @@
 ---
 import { buttonVariants } from '@/components/ui/button'
+import { HOMEPAGE_URL } from '../../config.ts'
+import ThemeToggle from '@/components/ThemeToggle.astro'
 import HeaderLink from '@/components/HeaderLink.astro'
 ---
 
@@ -10,11 +12,11 @@ import HeaderLink from '@/components/HeaderLink.astro'
     class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
   >
     <div class="flex gap-6 md:gap-10">
-      <a href="/" class="flex items-center space-x-2">
+      <a href={HOMEPAGE_URL} class="flex items-center space-x-2">
         <span class="inline-block font-bold">Rémi Meullemeestre</span>
       </a>
     </div>
-    <div class="flex flex-1 items-center justify-end space-x-4">
+    <div class="items-center space-x-4">
       <nav class="flex items-center space-x-1">
         <HeaderLink href="/" class={buttonVariants({ variant: 'ghost' })}
           >Home</HeaderLink
@@ -30,6 +32,9 @@ import HeaderLink from '@/components/HeaderLink.astro'
           >Contact</HeaderLink
         >
       </nav>
+    </div>
+    <div>
+      <ThemeToggle />
     </div>
   </div>
 </header>
