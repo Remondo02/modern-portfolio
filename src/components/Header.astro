@@ -1,0 +1,35 @@
+---
+import { buttonVariants } from '@/components/ui/button'
+import HeaderLink from '@/components/HeaderLink.astro'
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+>
+  <div
+    class="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0"
+  >
+    <div class="flex gap-6 md:gap-10">
+      <a href="/" class="flex items-center space-x-2">
+        <span class="inline-block font-bold">Rémi Meullemeestre</span>
+      </a>
+    </div>
+    <div class="flex flex-1 items-center justify-end space-x-4">
+      <nav class="flex items-center space-x-1">
+        <HeaderLink href="/" class={buttonVariants({ variant: 'ghost' })}
+          >Home</HeaderLink
+        >
+        <HeaderLink
+          href="/projects"
+          class={buttonVariants({ variant: 'ghost' })}>Projects</HeaderLink
+        >
+        <HeaderLink href="/blog" class={buttonVariants({ variant: 'ghost' })}
+          >Blog</HeaderLink
+        >
+        <HeaderLink href="/contact" class={buttonVariants({ variant: 'ghost' })}
+          >Contact</HeaderLink
+        >
+      </nav>
+    </div>
+  </div>
+</header>

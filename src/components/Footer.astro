@@ -1,0 +1,16 @@
+---
+import { HOMEPAGE_URL } from '../../config.ts'
+const today = new Date()
+---
+
+<footer class="border-t py-6">
+  <div class="container flex flex-col items-center justify-between gap-4">
+    <p class="text-center text-sm leading-loose text-muted-foreground">
+      &copy; {today.getFullYear()}
+      <a href={HOMEPAGE_URL} class="font-medium underline underline-offset-4">
+        Rémi Meullemeestre
+      </a>
+      . All rights reserved.
+    </p>
+  </div>
+</footer>
