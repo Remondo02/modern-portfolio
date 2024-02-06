@@ -8,8 +8,9 @@ import { buttonVariants } from '@/components/ui/button'
 <BaseLayout
   title="Astro Shadcn UI Template"
   description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
+  class="max-w-screen-md"
 >
-  <section class="container max-w-screen-md mx-auto flex items-center justify-between gap-6 pb-8 pt-6 md:py-10">
+  <section class="flex items-center justify-between gap-6 pb-8 pt-6 md:py-10">
     <div class="flex flex-col items-start gap-2">
       <h1
         class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
@@ -26,8 +27,38 @@ import { buttonVariants } from '@/components/ui/button'
       <Image
         src={profil}
         alt="profil picture"
-        class="h-[120px] w-[120px] rounded-full object-cover object-center border-4"
+        class="h-[120px] w-[120px] rounded-full border-4 object-cover object-center"
       />
+    </div>
+  </section>
+  <section class="flex flex-col items-start gap-6 pb-8 pt-6 md:py-10">
+    <div class="flex flex-col items-start gap-2">
+      <h2
+        class="border-b pb-2 text-xl font-extrabold leading-tight tracking-tighter md:text-2xl"
+      >
+        PROJECTS
+      </h2>
+      <p class="text-justify text-lg text-muted-foreground">
+        I love R&D: searching, testing and implementing new techs and stacks,
+        always looking for easier and better ways of solving common issues. My
+        core tools are <span class="font-bold">PHP</span>, <span
+          class="font-bold">React</span
+        > and <span class="font-bold">Astro</span>. I'm also familiar with
+        <span class="font-bold">TypeScript</span>, <span class="font-bold"
+          >Node.js</span
+        >, <span class="font-bold">MongoDB</span>, <span class="font-bold"
+          >Electron.js</span
+        > and CMS like <span class="font-bold">WordPress</span> and <span
+          class="font-bold">Sanity</span
+        >.<br class="mb-4 hidden sm:inline" />
+        When not online, I love hanging out with my wife as we live in a beautiful
+        environnement, having a good meal, reading and playing with my cat.
+      </p>
+    </div>
+    <div class="flex w-full justify-center">
+      <a href="/projects" class:list={[buttonVariants(), 'transition-none']}>
+        Projects
+      </a>
     </div>
   </section>
 </BaseLayout>

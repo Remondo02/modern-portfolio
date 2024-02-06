@@ -8,9 +8,10 @@ interface Props {
   title?: string | undefined
   description?: string | undefined
   ogImage?: URL | undefined
+  class?: string | undefined
 }
 
-const { title, description, ogImage } = Astro.props
+const { title, description, ogImage, class: className } = Astro.props
 ---
 
 <html lang="en">
@@ -21,7 +22,7 @@ const { title, description, ogImage } = Astro.props
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="relative flex min-h-screen flex-col">
       <Header />
-      <main class="flex-auto">
+      <main class:list={["container mx-auto flex-auto", className]}>
         <slot />
       </main>
       <Footer />
