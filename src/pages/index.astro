@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets'
+import profil from '../../public/remi.jpg'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { buttonVariants } from '@/components/ui/button'
 ---
@@ -7,35 +9,25 @@ import { buttonVariants } from '@/components/ui/button'
   title="Astro Shadcn UI Template"
   description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
 >
-  <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-    <div class="flex max-w-[980px] flex-col items-start gap-2">
+  <section class="container max-w-screen-md mx-auto flex items-center justify-between gap-6 pb-8 pt-6 md:py-10">
+    <div class="flex flex-col items-start gap-2">
       <h1
         class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
       >
-        HOME <br class="hidden sm:inline" />
-        PAGE
+        REMI MEULLEMEESTRE
       </h1>
-      <p class="max-w-[700px] text-lg text-muted-foreground">
-        Home page showing basic informations about me.
+      <p class="text-lg text-muted-foreground">
+        I'm a <span class="font-bold">full-stack developer</span> with <span
+          class="font-bold">5+ years</span
+        > of experience.
       </p>
     </div>
-    <div class="flex gap-4">
-      <a
-        href="https://ui.shadcn.com"
-        target="_blank"
-        rel="noreferrer"
-        class={buttonVariants()}
-      >
-        Documentation
-      </a>
-      <a
-        href="https://github.com/AREA44/astro-shadcn-ui-template"
-        target="_blank"
-        rel="noreferrer"
-        class={buttonVariants({ variant: 'outline' })}
-      >
-        GitHub
-      </a>
+    <div class="grid place-items-center rounded-lg p-6 lg:overflow-visible">
+      <Image
+        src={profil}
+        alt="profil picture"
+        class="h-[120px] w-[120px] rounded-full object-cover object-center border-4"
+      />
     </div>
   </section>
 </BaseLayout>
