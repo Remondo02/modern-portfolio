@@ -18,17 +18,24 @@ import HeaderLink from '@/components/HeaderLink.astro'
     </div>
     <div class="items-center space-x-4">
       <nav class="flex items-center space-x-1">
-        <HeaderLink href="/" class={`${buttonVariants({ variant: 'ghost' })} transition-none`}
+        <HeaderLink
+          href="/"
+          class:list={[buttonVariants({ variant: 'ghost' }), 'transition-none']}
           >Home</HeaderLink
         >
         <HeaderLink
           href="/projects"
-          class={`${buttonVariants({ variant: 'ghost' })} transition-none`}>Projects</HeaderLink
+          class:list={[buttonVariants({ variant: 'ghost' }), 'transition-none']}
+          >Projects</HeaderLink
         >
-        <HeaderLink href="/blog" class={`${buttonVariants({ variant: 'ghost' })} transition-none`}
+        <HeaderLink
+          href="/blog"
+          class:list={[buttonVariants({ variant: 'ghost' }), 'transition-none']}
           >Blog</HeaderLink
         >
-        <HeaderLink href="/contact" class={`${buttonVariants({ variant: 'ghost' })} transition-none`}
+        <HeaderLink
+          href="/contact"
+          class:list={[buttonVariants({ variant: 'ghost' }), 'transition-none']}
           >Contact</HeaderLink
         >
       </nav>
