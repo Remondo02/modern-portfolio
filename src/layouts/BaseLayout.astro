@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ViewTransitions } from 'astro:transitions'
 import HeadSEO from '@/components/HeadSEO.astro'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
@@ -9,6 +9,26 @@ interface Props {
   description?: string | undefined
   ogImage?: URL | undefined
   class?: string | undefined
+}
+
+const fadeAnimation = {
+  old: {
+    name: 'fadeIn',
+    duration: '0.4s',
+    easing: 'linear',
+    fillMode: 'forwards',
+  },
+  new: {
+    name: 'fadeOut',
+    duration: '0.4s',
+    easing: 'linear',
+    fillMode: 'backwards',
+  },
+}
+
+const fade = {
+  forwards: fadeAnimation,
+  backwards: fadeAnimation,
 }
 
 const { title, description, ogImage, class: className } = Astro.props
@@ -22,10 +42,33 @@ const { title, description, ogImage, class: className } = Astro.props
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="relative flex min-h-screen flex-col">
       <Header />
-      <main class:list={["container mx-auto flex-auto", className]}>
+      <main
+        transition:animate={fade}
+        class:list={['container mx-auto flex-auto', className]}
+      >
         <slot />
       </main>
       <Footer />
     </div>
+    <style is:global>
+      @keyframes fadeIn {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes fadeOut {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
   </body>
 </html>
