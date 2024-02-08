@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets'
+import profil from './../assets/images/remi.jpg'
+---
+
+<section
+  class="flex flex-col-reverse items-center justify-between gap-6 pb-8 pt-6 md:flex-row md:py-10"
+>
+  <div
+    class="flex flex-col justify-center gap-2 text-center md:items-start md:text-left"
+  >
+    <h1
+      class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
+    >
+      REMI MEULLEMEESTRE
+    </h1>
+    <p class="text-lg text-muted-foreground">
+      I'm a <span class="font-bold">full-stack developer</span> with <span
+        class="font-bold">5+ years</span
+      > of experience.
+    </p>
+  </div>
+  <div class="grid rounded-lg p-6 md:items-center lg:overflow-visible">
+    <Image
+      src={profil}
+      alt="profil picture"
+      class="h-[120px] w-[120px] rounded-full border-4 object-cover object-center"
+      width="240"
+      height="323"
+    />
+  </div>
+</section>

@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets'
+
+import astro from './../assets/images/astro.png'
+import css from './../assets/images/css.png'
+import figma from './../assets/images/figma.png'
+import git from './../assets/images/git.png'
+import html from './../assets/images/html.png'
+import javascript from './../assets/images/javascript.png'
+import mui from './../assets/images/mui.png'
+import node from './../assets/images/node.png'
+import react from './../assets/images/react.png'
+import redux from './../assets/images/redux.png'
+import sanity from './../assets/images/sanity.png'
+import sass from './../assets/images/sass.png'
+import typescript from './../assets/images/typescript.png'
+import wordpress from './../assets/images/wordpress.png'
+
+const skills = [
+  {
+    image: astro,
+    title: 'Astro',
+  },
+  {
+    image: css,
+    title: 'CSS3',
+  },
+  {
+    image: figma,
+    title: 'Figma',
+  },
+  {
+    image: git,
+    title: 'Git',
+  },
+  {
+    image: html,
+    title: 'HTML5',
+  },
+  {
+    image: javascript,
+    title: 'JavaScript',
+  },
+  {
+    image: mui,
+    title: 'Material UI',
+  },
+  {
+    image: node,
+    title: 'Node JS',
+  },
+  {
+    image: react,
+    title: 'React JS',
+  },
+  {
+    image: redux,
+    title: 'Redux',
+  },
+  {
+    image: sass,
+    title: 'Sass',
+  },
+  {
+    image: sanity,
+    title: 'Sanity',
+  },
+  {
+    image: typescript,
+    title: 'TypeScript',
+  },
+  {
+    image: wordpress,
+    title: 'WordPress',
+  },
+]
+---
+
+<section class="gap-6 pb-8 pt-6 md:py-10">
+  <div class="flex flex-col items-start gap-7">
+    <h2
+      class="border-b pb-2 text-xl font-extrabold leading-tight tracking-tighter md:text-2xl"
+    >
+      SKILLS
+    </h2>
+    <div class="grid w-full grid-cols-3 gap-10 sm:grid-cols-4 md:grid-cols-5">
+      {
+        skills.map((skill) => {
+          return (
+            <div class="flex flex-col items-center">
+              <div class="mb-2 flex h-16 w-16 rounded-full bg-secondary p-4">
+                <Image
+                  src={skill.image}
+                  alt={`Logo ${skill.title}`}
+                  class="flex-shrink-0"
+                  width="64"
+                  height="64"
+                />
+              </div>
+              <p class="hyphens-auto text-justify text-sm text-muted-foreground">
+                {skill.title}
+              </p>
+            </div>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>
