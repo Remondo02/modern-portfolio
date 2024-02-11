@@ -1,10 +1,22 @@
 ---
-import { sanityClient } from "sanity:client"
-const projects = await sanityClient.fetch(
-  `*[_type == "project" && defined(slug)] | order(createdAt desc)`
-)
+import { sanityClient } from "sanity:client";
+import PortableText from '../../components/PortableText.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro'
-// import { buttonVariants } from '@/components/ui/button'
+
+export async function getStaticPaths() {
+    const projects = await sanityClient.fetch(`*[_type == "project" && defined(slug)] | order(createdAt desc)`);
+
+  return projects.map((project) => {
+    return {
+        params: {
+        slug: project.slug?.current || '',
+      },
+      props: { ...project },
+    }
+  })
+}
+
+const { title, body } = Astro.props
 ---
 
 <BaseLayout
@@ -16,18 +28,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
       <h1
         class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
       >
-        PROJECTS
+        {title}
       </h1>
       <p class="max-w-[700px] text-lg text-muted-foreground">
-        List of projects.
+        <PortableText portableText={body} />
       </p>
-      {
-        projects && (
-            projects.map((project) => (
-                <a href={`project/${project.slug.current}`}>{project.title}</a>
-            ))
-        )
-      }
     </div>
   </section>
 </BaseLayout>
