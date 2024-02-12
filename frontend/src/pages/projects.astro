@@ -1,31 +1,57 @@
 ---
-import { sanityClient } from "sanity:client"
-const projects = await sanityClient.fetch(
-  `*[_type == "project" && defined(slug)] | order(createdAt desc)`
-)
+import { sanityClient } from 'sanity:client'
+import type { Project } from '../lib/sanitySchemas'
+import PortableTextImage from '@/components/PortableTextImage.astro'
+import { Badge } from '@/components/ui/badge'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-// import { buttonVariants } from '@/components/ui/button'
+
+const projects: Project[] = await sanityClient.fetch(
+  `*[_type == "project" && defined(slug)] | order(createdAt desc) {slug, mainImage, title, body, "skills": skills[]->title, "excerpt": array::join(string::split((pt::text(body)), "")[0..255], "") + "..."}`,
+)
 ---
 
 <BaseLayout
   title="Astro Shadcn UI Template"
   description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
 >
-  <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-    <div class="flex max-w-[980px] flex-col items-start gap-2">
+  <section
+    class="flex flex-col-reverse items-center justify-between gap-6 pb-8 pt-6 md:flex-row md:py-10"
+  >
+    <div class="flex flex-col items-start gap-10">
       <h1
         class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
       >
         PROJECTS
       </h1>
-      <p class="max-w-[700px] text-lg text-muted-foreground">
-        List of projects.
-      </p>
       {
         projects && (
-            projects.map((project) => (
-                <a href={`project/${project.slug.current}`}>{project.title}</a>
-            ))
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+            {projects.map((project) => (
+              <a href={`project/${project.slug.current}`} class="h-fit">
+                <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+                  <div class="flex flex-col space-y-1.5 p-0">
+                    {project.mainImage && (
+                      <PortableTextImage
+                        asset={project.mainImage.asset}
+                        class="rounded-t-lg"
+                      />
+                    )}
+                    <h2 class="p-6 text-2xl font-semibold leading-none tracking-tight">
+                      {project.title}
+                    </h2>
+                  </div>
+                  <div class="p-6 pt-0 text-base text-muted-foreground">
+                    {project.excerpt}
+                  </div>
+                  <div class="flex flex-wrap items-center gap-2 p-6 pt-0">
+                    {project.skills.map((skill) => (
+                      <Badge className="transition-none" variant="secondary">{skill}</Badge>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
         )
       }
     </div>
