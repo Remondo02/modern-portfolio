@@ -40,7 +40,7 @@ const projects: Project[] = await sanityClient.fetch(
                   {project.mainImage && (
                     <PortableTextImage
                       asset={project.mainImage.asset}
-                      class="rounded-t-lg"
+                      class="w-full aspect-video object-cover rounded-t-lg"
                     />
                   )}
                   <h2 class="p-6 text-2xl font-semibold leading-none tracking-tight">
