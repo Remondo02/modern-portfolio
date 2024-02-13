@@ -13,7 +13,6 @@ const projects: Project[] = await sanityClient.fetch(
 <BaseLayout
   title="Astro Shadcn UI Template"
   description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
-  class="max-w-screen-md"
 >
   <section class="flex flex-col pb-8 pt-12 md:py-20">
     <div class="flex flex-col items-start gap-2 pb-8 md:pb-20">
@@ -47,9 +46,9 @@ const projects: Project[] = await sanityClient.fetch(
                     {project.title}
                   </h2>
                 </div>
-                <div class="p-6 pt-0 text-base text-muted-foreground">
+                <p class="p-6 pt-0 text-base text-muted-foreground">
                   {project.excerpt}
-                </div>
+                </p>
                 <div class="flex flex-wrap items-center gap-2 p-6 pt-0">
                   {project.skills.map((skill) => (
                     <Badge className="transition-none" variant="secondary">
