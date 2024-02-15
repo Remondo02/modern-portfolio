@@ -51,7 +51,7 @@ export type PageProjectsProps = TypeFromSelection<
 >
 
 export type SingleProjectsProps = TypeFromSelection<
-  typeof MergedProjectSingleProps
+  typeof MergedProjectSingleSelection
 >
 
 export const runQuery = makeSafeQueryRunner(
