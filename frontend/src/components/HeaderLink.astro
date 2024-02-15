@@ -1,6 +1,5 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-interface Props extends HTMLAttributes<'a'> {}
+interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
 
 const { href, class: className, ...props } = Astro.props
 const pathName = Astro.url.pathname
