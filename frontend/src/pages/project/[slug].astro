@@ -32,9 +32,18 @@ const { title, body } = Astro.props
       >
         {title}
       </h1>
-      <p class="max-w-[700px] text-lg text-muted-foreground">
+      <!-- <p class="max-w-[700px] text-lg text-muted-foreground">
         <PortableText portableText={body} />
-      </p>
+      </p> -->
+      <article>
+        <PortableText portableText={body} />
+      </article>
     </div>
   </section>
 </BaseLayout>
+
+<!-- <style>
+  h1 {
+    font-weight: 400;
+  }
+</style> -->

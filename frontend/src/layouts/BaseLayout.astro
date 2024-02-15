@@ -31,7 +31,12 @@ const fade = {
   backwards: fadeAnimation,
 }
 
-const { title, description, ogImage, class: className="max-w-screen-md" } = Astro.props
+const {
+  title,
+  description,
+  ogImage,
+  class: className = 'max-w-screen-md',
+} = Astro.props
 ---
 
 <html lang="en">
