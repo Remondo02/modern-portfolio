@@ -14,10 +14,18 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
+      validation: (Rule) => Rule.required(),
       options: {
         source: 'title',
         maxLength: 96,
       },
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+      rows: 4,
+      validation: Rule => Rule.min(80).max(160)
     }),
     defineField({
       name: 'mainImage',
