@@ -4,47 +4,53 @@ import {
   makeSafeQueryRunner,
   type TypeFromSelection,
   type Selection,
-  InferType,
   sanityImage,
-  nullToUndefined,
 } from 'groqd'
 
-// export const projectQuery = q('*')
-//   .filter("_type == 'project' && defined(slug)")
-//   .order('createdAt desc')
-//   .grab({
-//     slug: ['slug.current', q.string()],
-//     mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
-//     title: q.string(),
-//     body: q('body')
-//       .filter()
-//       .select({
-//         '_type == "block"': ['{...}', q.contentBlock()],
-//         '_type == "figure"': {
-//           _type: q.literal('figure'),
-//           asset: q('asset').grabOne('_ref', q.string()),
-//         },
-//         default: {
-//           _key: q.string(),
-//           _type: ['"unsupported"', q.literal('unsupported')],
-//           unsupportedType: ['_type', q.string()],
-//         },
-//       }),
-//     skills: q('skills').filter().deref().grab({ title: q.string() }),
-//     publishedAt: ['_createdAt', q.string()],
-//     excerpt: q.string().nullable(),
-//   })
-
-export const pageProjectSelection = {
+export const commentProjectSelection = {
   slug: ['slug.current', q.string()],
   mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
   title: q.string(),
   skills: q('skills').filter().deref().grab({ title: q.string() }),
-  excerpt: q.string().nullable(),
   createdAt: ['createdAt', q.string()],
 } satisfies Selection
 
-export type PageProjectsProps = TypeFromSelection<typeof pageProjectSelection>
+export const pageProjectSelection = {
+  excerpt: q.string(),
+} satisfies Selection
+
+export const singleProjectSelection = {
+  body: q('body')
+    .filter()
+    .select({
+      '_type == "block"': ['{...}', q.contentBlock()],
+      '_type == "figure"': {
+        _type: q.literal('figure'),
+        asset: q('asset').grabOne('_ref', q.string()),
+      },
+      default: {
+        _key: q.string(),
+        _type: ['"unsupported"', q.literal('unsupported')],
+        unsupportedType: ['_type', q.string()],
+      },
+    }),
+} satisfies Selection
+
+const MergedProjectPageProps = {
+  ...commentProjectSelection,
+  ...pageProjectSelection,
+}
+
+const MergedProjectSingleProps = {
+  ...commentProjectSelection,
+  ...singleProjectSelection,
+}
+
+export type PageProjectsProps = TypeFromSelection<typeof MergedProjectPageProps>
+
+export type SingleProjectsProps = TypeFromSelection<
+  typeof MergedProjectSingleProps
+>
 
 export const runQuery = makeSafeQueryRunner(
   (query, params: Record<string, unknown> = {}) =>

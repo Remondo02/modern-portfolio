@@ -1,15 +1,15 @@
 ---
 import { q } from 'groqd'
-import { pageProjectSelection } from './../lib/project'
+import { commentProjectSelection, pageProjectSelection } from './../lib/project'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { runQuery } from './../lib/project'
 import PageProjectCard from '../components/PageProjectCard.astro'
 
 async function getProjects() {
   return runQuery(
-    q('*', { isArray: true })
+    q('*')
       .filter("_type == 'project' && defined(slug)")
-      .grab$(pageProjectSelection)
+      .grab$({ ...commentProjectSelection, ...pageProjectSelection })
       .order('createdAt desc'),
   )
 }
