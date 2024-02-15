@@ -36,20 +36,20 @@ export const singleProjectSelection = {
     }),
 } satisfies Selection
 
-const MergedProjectPageProps = {
+const MergedProjectPageSelection = {
   ...commentProjectSelection,
   ...pageProjectSelection,
 }
 
-const MergedProjectSingleProps = {
+const MergedProjectSingleSelection = {
   ...commentProjectSelection,
   ...singleProjectSelection,
 }
 
-export type PageProjectsProps = TypeFromSelection<typeof MergedProjectPageProps>
+export type PageProjectsProps = TypeFromSelection<typeof MergedProjectPageSelection>
 
 export type SingleProjectsProps = TypeFromSelection<
-  typeof MergedProjectSingleProps
+  typeof MergedProjectSingleSelection
 >
 
 export const runQuery = makeSafeQueryRunner(
