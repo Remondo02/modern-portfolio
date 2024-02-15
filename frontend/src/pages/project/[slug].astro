@@ -1,24 +1,56 @@
 ---
-import { sanityClient } from 'sanity:client'
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
+import { q, type Selection, sanityImage } from 'groqd'
+import { runQuery } from './../../lib/project'
 import PortableText from '../../components/PortableText.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-export async function getStaticPaths() {
-  const projects = await sanityClient.fetch(
-    `*[_type == "project" && defined(slug)] | order(createdAt desc)`,
-  )
+export const getStaticPaths = (async () => {
+  const singleProjectSelection = {
+    slug: ['slug.current', q.string()],
+    mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
+    title: q.string(),
+    skills: q('skills').filter().deref().grab({ title: q.string() }),
+    createdAt: ['createdAt', q.string()],
+    body: q('body')
+      .filter()
+      .select({
+        '_type == "block"': ['{...}', q.contentBlock()],
+        '_type == "figure"': {
+          _type: q.literal('figure'),
+          asset: q('asset').grabOne('_ref', q.string()),
+        },
+        default: {
+          _key: q.string(),
+          _type: ['"unsupported"', q.literal('unsupported')],
+          unsupportedType: ['_type', q.string()],
+        },
+      }),
+  } satisfies Selection
+
+  async function getProjects() {
+    return runQuery(
+      q('*')
+        .filter("_type == 'project' && defined(slug)")
+        .grab(singleProjectSelection)
+        .order('createdAt desc'),
+    )
+  }
+  const projects = await getProjects()
 
   return projects.map((project) => {
     return {
       params: {
-        slug: project.slug?.current || '',
+        slug: project.slug || '',
       },
       props: { ...project },
     }
   })
-}
+}) satisfies GetStaticPaths
 
-const { title, body } = Astro.props
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+const { ...project } = Astro.props
 ---
 
 <BaseLayout
@@ -30,13 +62,13 @@ const { title, body } = Astro.props
       <h1
         class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
       >
-        {title}
+        {project.title}
       </h1>
       <!-- <p class="max-w-[700px] text-lg text-muted-foreground">
         <PortableText portableText={body} />
       </p> -->
       <article>
-        <PortableText portableText={body} />
+        <PortableText portableText={project.body} />
       </article>
     </div>
   </section>
