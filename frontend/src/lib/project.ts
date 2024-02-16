@@ -34,7 +34,11 @@ export const singleProjectSelection = {
         unsupportedType: ['_type', q.string()],
       },
     }),
+  projectLink: q.string().url().nullable(),
+  repositoryLink: q.string().url().nullable(),
 } satisfies Selection
+
+// projectLink, repositoryLink
 
 export const projectPageSelection = {
   ...commonProjectSelection,

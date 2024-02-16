@@ -1,5 +1,8 @@
 ---
 import { Badge } from '@/components/ui/badge'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Github, ExternalLink } from 'lucide-react'
+
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
 import { q } from 'groqd'
 import { runQuery, projectSingleSelection } from './../../lib/project'
@@ -73,6 +76,34 @@ const { ...project } = Astro.props
           />
         )
       }
+      <div class="flex gap-2">
+        {
+          project.projectLink && (
+            <a
+              href={project.projectLink}
+              class:list={[buttonVariants(), 'transition-none']}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Website
+            </a>
+          )
+        }
+        {
+          project.repositoryLink && (
+            <a
+              href={project.repositoryLink}
+              class:list={[buttonVariants(), 'transition-none']}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              Source
+            </a>
+          )
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>
