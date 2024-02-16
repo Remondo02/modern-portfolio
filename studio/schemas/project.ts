@@ -25,7 +25,7 @@ export default defineType({
       title: 'Excerpt',
       type: 'text',
       rows: 4,
-      validation: Rule => Rule.min(80).max(160)
+      validation: Rule => Rule.required().min(80).max(160)
     }),
     defineField({
       name: 'mainImage',
