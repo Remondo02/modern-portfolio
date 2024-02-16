@@ -1,16 +1,17 @@
 ---
+import { Badge } from '@/components/ui/badge'
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
 import { q } from 'groqd'
 import { runQuery, projectSingleSelection } from './../../lib/project'
 import PortableText from '../../components/PortableText.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import PortableTextImage from '@/components/PortableTextImage.astro'
+import { formatDate } from './../../lib'
 
 export const getStaticPaths = (async () => {
   async function getProjects() {
     return runQuery(
-      q('*')
-        .filter("_type == 'project'")
-        .grab(projectSingleSelection)
+      q('*').filter("_type == 'project'").grab(projectSingleSelection),
     )
   }
   const projects = await getProjects()
@@ -34,25 +35,44 @@ const { ...project } = Astro.props
   title="Astro Shadcn UI Template"
   description="This template helps you build apps with Astro, Tailwind CSS, and Shadcn UI."
 >
-  <section class="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-    <div class="flex max-w-[980px] flex-col items-start gap-2">
-      <h1
-        class="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl"
+  <section class="grid items-center">
+    <div class="flex flex-col items-start">
+      <div>
+        {
+          project.title && (
+            <h1 class="pb-2 text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+              {project.title.toLocaleUpperCase()}
+            </h1>
+          )
+        }
+        <div class="mb-8 rounded-md bg-secondary p-2">
+          Project created on {formatDate(project.createdAt)}
+        </div>
+      </div>
+      <article
+        class="pb-8 text-justify text-base text-muted-foreground paragraph:hyphens-auto anchor:font-medium anchor:underline anchor:underline-offset-4"
       >
-        {project.title}
-      </h1>
-      <!-- <p class="max-w-[700px] text-lg text-muted-foreground">
-        <PortableText portableText={body} />
-      </p> -->
-      <article>
         <PortableText portableText={project.body} />
       </article>
+      {
+        project.skills && (
+          <div class="mb-8 flex flex-wrap gap-2">
+            {project.skills.map((skill) => (
+              <Badge className="transition-none" variant="secondary">
+                {skill.title}
+              </Badge>
+            ))}
+          </div>
+        )
+      }
+      {
+        project.mainImage && (
+          <PortableTextImage
+            asset={project.mainImage.asset}
+            class="mb-8 aspect-video w-full rounded-lg object-cover "
+          />
+        )
+      }
     </div>
   </section>
 </BaseLayout>
-
-<!-- <style>
-  h1 {
-    font-weight: 400;
-  }
-</style> -->

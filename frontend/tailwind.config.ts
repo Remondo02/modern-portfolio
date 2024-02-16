@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 import animatePlugin from 'tailwindcss-animate'
-import { fontFamily } from 'tailwindcss/defaultTheme'
+import theme, { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config = {
   darkMode: ['class'],
@@ -74,7 +75,13 @@ const config = {
       },
     },
   },
-  plugins: [animatePlugin],
+  plugins: [
+    animatePlugin,
+    plugin(function ({ addVariant }) {
+      addVariant('paragraph', '&>p')
+      addVariant('anchor', '&>p>a')
+    }),
+  ],
 } satisfies Config
 
 export default config
