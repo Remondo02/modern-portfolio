@@ -1,16 +1,14 @@
 ---
 import { q } from 'groqd'
-import { runQuery } from './../lib/project'
+import { runQuery, projectPageSelection } from './../lib/project'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import PageProjectCard, {
-  pageProjectSelection,
-} from '../components/PageProjectCard.astro'
+import PageProjectCard from '../components/PageProjectCard.astro'
 
 async function getProjects() {
   return runQuery(
     q('*')
-      .filter("_type == 'project' && defined(slug)")
-      .grab(pageProjectSelection)
+      .filter("_type == 'project'")
+      .grab(projectPageSelection)
       .order('createdAt desc'),
   )
 }

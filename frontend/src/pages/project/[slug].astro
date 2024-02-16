@@ -1,39 +1,16 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
-import { q, type Selection, sanityImage } from 'groqd'
-import { runQuery } from './../../lib/project'
+import { q } from 'groqd'
+import { runQuery, projectSingleSelection } from './../../lib/project'
 import PortableText from '../../components/PortableText.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
 export const getStaticPaths = (async () => {
-  const singleProjectSelection = ({
-    slug: ['slug.current', q.string()],
-    mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
-    title: q.string(),
-    skills: q('skills').filter().deref().grab({ title: q.string() }),
-    createdAt: ['createdAt', q.string()],
-    body: q('body')
-      .filter()
-      .select({
-        '_type == "block"': ['{...}', q.contentBlock()],
-        '_type == "figure"': {
-          _type: q.literal('figure'),
-          asset: q('asset').grabOne('_ref', q.string()),
-        },
-        default: {
-          _key: q.string(),
-          _type: ['"unsupported"', q.literal('unsupported')],
-          unsupportedType: ['_type', q.string()],
-        },
-      }),
-  }) satisfies Selection
-
   async function getProjects() {
     return runQuery(
       q('*')
-        .filter("_type == 'project' && defined(slug)")
-        .grab(singleProjectSelection)
-        .order('createdAt desc'),
+        .filter("_type == 'project'")
+        .grab(projectSingleSelection)
     )
   }
   const projects = await getProjects()

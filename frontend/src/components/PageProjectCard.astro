@@ -1,18 +1,7 @@
 ---
-import { q, type TypeFromSelection, type Selection, sanityImage } from 'groqd'
 import { Badge } from '@/components/ui/badge'
 import PortableTextImage from '@/components/PortableTextImage.astro'
-
-export const pageProjectSelection = ({
-  slug: ['slug.current', q.string()],
-  mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
-  title: q.string(),
-  skills: q('skills').filter().deref().grab({ title: q.string() }),
-  createdAt: ['createdAt', q.string()],
-  excerpt: q.string(),
-}) satisfies Selection
-
-type PageProjectsProps = TypeFromSelection<typeof pageProjectSelection>
+import { type PageProjectsProps } from './../lib/project'
 
 interface Props {
   project: PageProjectsProps

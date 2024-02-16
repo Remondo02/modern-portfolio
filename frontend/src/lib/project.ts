@@ -7,7 +7,7 @@ import {
   sanityImage,
 } from 'groqd'
 
-export const commentProjectSelection = {
+export const commonProjectSelection = {
   slug: ['slug.current', q.string()],
   mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
   title: q.string(),
@@ -36,22 +36,20 @@ export const singleProjectSelection = {
     }),
 } satisfies Selection
 
-const MergedProjectPageSelection = {
-  ...commentProjectSelection,
+export const projectPageSelection = {
+  ...commonProjectSelection,
   ...pageProjectSelection,
 }
 
-const MergedProjectSingleSelection = {
-  ...commentProjectSelection,
+export const projectSingleSelection = {
+  ...commonProjectSelection,
   ...singleProjectSelection,
 }
 
-export type PageProjectsProps = TypeFromSelection<
-  typeof MergedProjectPageSelection
->
+export type PageProjectsProps = TypeFromSelection<typeof projectPageSelection>
 
 export type SingleProjectsProps = TypeFromSelection<
-  typeof MergedProjectSingleSelection
+  typeof projectSingleSelection
 >
 
 export const runQuery = makeSafeQueryRunner(
