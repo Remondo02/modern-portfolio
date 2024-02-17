@@ -6,6 +6,7 @@ import { HOMEPAGE_URL } from './config'
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'hybrid',
   site: HOMEPAGE_URL,
   integrations: [
     react(),

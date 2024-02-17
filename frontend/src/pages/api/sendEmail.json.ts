@@ -3,13 +3,23 @@ import { Resend } from 'resend'
 
 const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY)
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const POST: APIRoute = async ({ request }) => {
+  const body = await request.json()
+  const { to, from, html, subject, text } = body
+
+  if (!from || !to || !subject || !html || !text) {
+    return new Response(null, {
+      status: 400,
+      statusText: 'Missing required fields',
+    })
+  }
+
   const send = await resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'remi.meullemeestre@gmail.com',
-    subject: 'Hello World',
-    html: '<p>Congrats on sending your <strong>first email</strong>!</p>',
-    text: 'Test',
+    from,
+    to,
+    subject,
+    html,
+    text,
   })
 
   if (send.data) {

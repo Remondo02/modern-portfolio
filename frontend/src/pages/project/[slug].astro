@@ -59,7 +59,7 @@ const { ...project } = Astro.props
       >
         <PortableText portableText={project.body} />
       </article>
-      <div class="flex gap-2 mb-8">
+      <div class="mb-8 flex gap-2">
         {
           project.projectLink && (
             <a
@@ -77,7 +77,10 @@ const { ...project } = Astro.props
           project.repositoryLink && (
             <a
               href={project.repositoryLink}
-              class:list={[buttonVariants({variant: 'outline'}), 'transition-none']}
+              class:list={[
+                buttonVariants({ variant: 'outline' }),
+                'transition-none',
+              ]}
               target="_blank"
               rel="noreferrer"
             >
@@ -106,7 +109,6 @@ const { ...project } = Astro.props
           />
         )
       }
-    
     </div>
   </section>
 </BaseLayout>
