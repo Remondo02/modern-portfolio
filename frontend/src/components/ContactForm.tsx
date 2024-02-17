@@ -4,6 +4,7 @@ export default function Form() {
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
+    const { name, email, message } = Object.fromEntries(formData)
     await fetch('/api/sendEmail.json', {
       method: 'POST',
       headers: {
@@ -12,9 +13,9 @@ export default function Form() {
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: 'remi.meullemeestre@gmail.com',
-        subject: `Contact de ${formData.get('name')} ${formData.get('email')}`,
-        html: formData.get('message'),
-        text: formData.get('message'),
+        subject: `Contact de ${name}, ${email}`,
+        html: message,
+        text: message,
       }),
     })
   }
