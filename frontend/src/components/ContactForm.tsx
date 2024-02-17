@@ -5,19 +5,25 @@ export default function Form() {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
     const { name, email, message } = Object.fromEntries(formData)
-    await fetch('/api/sendEmail.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'onboarding@resend.dev',
-        to: 'remi.meullemeestre@gmail.com',
-        subject: `Contact de ${name}, ${email}`,
-        html: message,
-        text: message,
-      }),
-    })
+    try {
+      const res = await fetch('/api/sendEmail.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'onboarding@resend.dev',
+          to: 'remi.meullemeestre@gmail.com',
+          subject: `Contact de ${name}, ${email}`,
+          html: message,
+          text: message,
+        }),
+      })
+      const data = await res.json()
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
