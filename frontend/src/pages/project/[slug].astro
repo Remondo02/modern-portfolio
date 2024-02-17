@@ -48,8 +48,10 @@ const { ...project } = Astro.props
             </h1>
           )
         }
-        <div class="mb-8 rounded-md bg-secondary p-2">
-          Project created on {formatDate(project.createdAt)}
+        <div class="mb-8">
+          <p class="text-base tracking-tight">
+            Project created on {formatDate(project.createdAt)}
+          </p>
         </div>
       </div>
       <article
@@ -57,6 +59,34 @@ const { ...project } = Astro.props
       >
         <PortableText portableText={project.body} />
       </article>
+      <div class="flex gap-2 mb-8">
+        {
+          project.projectLink && (
+            <a
+              href={project.projectLink}
+              class:list={[buttonVariants(), 'transition-none']}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Website
+            </a>
+          )
+        }
+        {
+          project.repositoryLink && (
+            <a
+              href={project.repositoryLink}
+              class:list={[buttonVariants({variant: 'outline'}), 'transition-none']}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              Source
+            </a>
+          )
+        }
+      </div>
       {
         project.skills && (
           <div class="mb-8 flex flex-wrap gap-2">
@@ -76,34 +106,7 @@ const { ...project } = Astro.props
           />
         )
       }
-      <div class="flex gap-2">
-        {
-          project.projectLink && (
-            <a
-              href={project.projectLink}
-              class:list={[buttonVariants(), 'transition-none']}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ExternalLink className="mr-2 h-4 w-4" />
-              Website
-            </a>
-          )
-        }
-        {
-          project.repositoryLink && (
-            <a
-              href={project.repositoryLink}
-              class:list={[buttonVariants(), 'transition-none']}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github className="mr-2 h-4 w-4" />
-              Source
-            </a>
-          )
-        }
-      </div>
+    
     </div>
   </section>
 </BaseLayout>
