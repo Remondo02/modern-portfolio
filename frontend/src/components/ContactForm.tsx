@@ -1,10 +1,12 @@
 import { type FormEvent } from 'react'
+import { useForm } from "react-hook-form";
 
 export default function Form() {
-  async function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
-    const { name, email, message } = Object.fromEntries(formData)
+
+
+  const { register, handleSubmit, formState: { errors }, formState } = useForm();
+
+  const onSubmit = async data => {
     try {
       const res = await fetch('/api/sendEmail.json', {
         method: 'POST',
@@ -14,37 +16,31 @@ export default function Form() {
         body: JSON.stringify({
           from: 'onboarding@resend.dev',
           to: 'remi.meullemeestre@gmail.com',
-          subject: `Contact de ${name}, ${email}`,
-          html: message,
-          text: message,
+          subject: `Contact de ${data.name}, ${data.email}`,
+          html: data.message,
+          text: data.message,
         }),
       })
-      const data = await res.json()
-      console.log(data)
+      const r = await res.json()
+      console.log(r)
     } catch (error) {
       console.error(error)
     }
   }
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="name">
         Name
-        <input type="text" id="name" name="name" autoComplete="name" required />
+        <input placeholder="Name" {...register("name")} />
       </label>
       <label htmlFor="email">
         Email
-        <input
-          type="email"
-          id="email"
-          name="email"
-          autoComplete="email"
-          required
-        />
+        <input placeholder="Bill" {...register("email")} />
       </label>
       <label htmlFor="message">
         Message
-        <textarea id="message" name="message" autoComplete="off" required />
+        <textarea {...register("message")}/>
       </label>
       <button>Send</button>
     </form>
