@@ -5,6 +5,7 @@ import {
   type TypeFromSelection,
   type Selection,
   sanityImage,
+  nullToUndefined,
 } from 'groqd'
 
 export const commonProjectSelection = {
@@ -26,6 +27,10 @@ export const singleProjectSelection = {
       '_type == "block"': ['{...}', q.contentBlock()],
       '_type == "figure"': {
         _type: q.literal('figure'),
+        asset: q('asset').grabOne('_ref', q.string()),
+      },
+      '_type == "image"': {
+        _type: q.literal('image'),
         asset: q('asset').grabOne('_ref', q.string()),
       },
       default: {
