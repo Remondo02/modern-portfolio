@@ -8,9 +8,14 @@ import {
   nullToUndefined,
 } from 'groqd'
 
+
+const altText = {
+  altText: q.string().nullable(),
+} satisfies Selection
+
 export const commonProjectSelection = {
   slug: ['slug.current', q.string()],
-  mainImage: sanityImage('mainImage', { withCrop: true }).nullable(),
+  mainImage: sanityImage('mainImage', { withCrop: true, additionalFields: altText }).nullable(),
   title: q.string(),
   skills: q('skills').filter().deref().grab({ title: q.string() }),
   createdAt: ['createdAt', q.string()],

@@ -34,6 +34,11 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      fields: [defineField({
+        name: 'altText',
+        title: 'Alternative text',
+        type: 'string',
+      }),]
     }),
     defineField({
       name: 'projectLink',

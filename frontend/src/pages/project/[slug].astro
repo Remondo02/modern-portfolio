@@ -107,6 +107,7 @@ console.log(project.body)
         project.mainImage && (
           <PortableTextImage
             asset={project.mainImage}
+            alt={project.mainImage?.altText}
             class="mb-8 aspect-video w-full rounded-lg object-cover "
           />
         )
