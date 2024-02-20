@@ -1,0 +1,22 @@
+---
+/* @/components/Image.astro */
+import { urlForImage } from '@/sanity/urlForImage'
+
+type Asset = Parameters<typeof urlForImage>[0]
+
+export interface Props {
+  asset: Asset
+  alt: string
+  class: string
+}
+
+const { asset, alt, class: className } = Astro.props
+
+const url = urlForImage(asset).url()
+const webpUrl = urlForImage(asset).format('webp').url()
+---
+
+<picture>
+  <source srcset={webpUrl} type="image/webp" />
+  <img class={className} src={url} alt={alt} />
+</picture>

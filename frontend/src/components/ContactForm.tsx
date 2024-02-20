@@ -1,12 +1,15 @@
 import { type FormEvent } from 'react'
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 
 export default function Form() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    formState,
+  } = useForm()
 
-
-  const { register, handleSubmit, formState: { errors }, formState } = useForm();
-
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     try {
       const res = await fetch('/api/sendEmail.json', {
         method: 'POST',
@@ -32,15 +35,15 @@ export default function Form() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="name">
         Name
-        <input placeholder="Name" {...register("name")} />
+        <input placeholder="Name" {...register('name')} />
       </label>
       <label htmlFor="email">
         Email
-        <input placeholder="Bill" {...register("email")} />
+        <input placeholder="Bill" {...register('email')} />
       </label>
       <label htmlFor="message">
         Message
-        <textarea {...register("message")}/>
+        <textarea {...register('message')} />
       </label>
       <button>Send</button>
     </form>

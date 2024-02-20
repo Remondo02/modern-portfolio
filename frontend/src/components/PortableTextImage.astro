@@ -1,4 +1,18 @@
 ---
+/* @/portabletext/Image.astro */
+import type { Props as $, TypedObject } from 'astro-portabletext/types'
+import Image from '@/components/Image.astro'
+
+type ImageProps = Parameters<typeof Image>[0]
+
+export type Props = $<ImageProps & TypedObject>
+
+const { node, ...props /*, isInline */ } = Astro.props
+---
+
+<Image {...node} {...props} />
+
+<!-- ---
 import { urlForImage } from '../sanity/urlForImage'
 
 const { asset, alt, class: className } = Astro.props.node ?? Astro.props
@@ -11,3 +25,4 @@ const webpUrl = urlForImage(asset).format('webp').url()
   <source srcset={webpUrl} type="image/webp" />
   <img class={className} src={url} alt={alt} />
 </picture>
+ -->
