@@ -8,14 +8,16 @@ import {
   nullToUndefined,
 } from 'groqd'
 
-
 const altText = {
   altText: q.string().nullable(),
 } satisfies Selection
 
 export const commonProjectSelection = {
   slug: ['slug.current', q.string()],
-  mainImage: sanityImage('mainImage', { withCrop: true, additionalFields: altText }).nullable(),
+  mainImage: sanityImage('mainImage', {
+    withCrop: true,
+    additionalFields: altText,
+  }).nullable(),
   title: q.string(),
   skills: q('skills').filter().deref().grab({ title: q.string() }),
   createdAt: ['createdAt', q.string()],
@@ -46,9 +48,12 @@ export const singleProjectSelection = {
     }),
   projectLink: q.string().url().nullable(),
   repositoryLink: q.string().url().nullable(),
+  projectImages: sanityImage('projectImages', {
+    isList: true,
+    withCrop: true,
+    additionalFields: altText,
+  }).nullable(),
 } satisfies Selection
-
-// projectLink, repositoryLink
 
 export const projectPageSelection = {
   ...commonProjectSelection,

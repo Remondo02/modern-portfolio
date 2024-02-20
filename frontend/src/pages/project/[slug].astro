@@ -33,7 +33,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { ...project } = Astro.props
 
-console.log(project.body)
+// console.log(project)
 ---
 
 <BaseLayout
@@ -111,6 +111,16 @@ console.log(project.body)
             class="mb-8 aspect-video w-full rounded-lg object-cover "
           />
         )
+      }
+      {
+        project.projectImages &&
+          project.projectImages.map((projectImage) => (
+            <PortableTextImage
+              asset={projectImage}
+              alt={projectImage?.altText}
+              class="mb-8 aspect-video w-full rounded-lg object-cover "
+            />
+          ))
       }
     </div>
   </section>

@@ -25,7 +25,7 @@ export default defineType({
       title: 'Excerpt',
       type: 'text',
       rows: 4,
-      validation: Rule => Rule.required().min(80).max(160)
+      validation: (Rule) => Rule.required().min(80).max(160),
     }),
     defineField({
       name: 'mainImage',
@@ -34,11 +34,13 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      fields: [defineField({
-        name: 'altText',
-        title: 'Alternative text',
-        type: 'string',
-      }),]
+      fields: [
+        defineField({
+          name: 'altText',
+          title: 'Alternative text',
+          type: 'string',
+        }),
+      ],
     }),
     defineField({
       name: 'projectLink',
@@ -65,6 +67,26 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'projectImages',
+      title: 'Images of the project',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: 'altText',
+              title: 'Alternative text',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
     }),
   ],
 
