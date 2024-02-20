@@ -1,15 +1,15 @@
 ---
 import { Badge } from '@/components/ui/badge'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Github, ExternalLink } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { ExternalLink, Github } from 'lucide-react'
 
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
-import { q } from 'groqd'
-import { runQuery, projectSingleSelection } from '@/lib/project'
 import PortableText from '@/components/PortableText.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
 import PortableTextImage from '@/components/PortableTextImage.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate } from '@/lib'
+import { projectSingleSelection, runQuery } from '@/lib/project'
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
+import { q } from 'groqd'
 
 import { metaDescriptionSlice } from '@/lib/utils'
 
