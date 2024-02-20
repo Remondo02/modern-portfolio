@@ -1,8 +1,8 @@
 ---
 import { q } from 'groqd'
-import { runQuery, projectPageSelection } from './../lib/project'
+import { runQuery, projectPageSelection } from '@/lib/project'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import PageProjectCard from '../components/PageProjectCard.astro'
+import PageProjectCard from '@/components/PageProjectCard.astro'
 
 async function getProjects() {
   return runQuery(
@@ -17,8 +17,8 @@ const projects = await getProjects()
 ---
 
 <BaseLayout
-title="Projects"
-description="A list of most of my most relevant projects."
+  title="Projects"
+  description="A list of most of my most relevant projects."
 >
   <section class="flex flex-col">
     <div class="flex flex-col items-start gap-2 pb-8">

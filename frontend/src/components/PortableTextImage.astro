@@ -7,22 +7,7 @@ type ImageProps = Parameters<typeof Image>[0]
 
 export type Props = $<ImageProps & TypedObject>
 
-const { node, ...props /*, isInline */ } = Astro.props
+const { node, ...props } = Astro.props
 ---
 
 <Image {...node} {...props} />
-
-<!-- ---
-import { urlForImage } from '../sanity/urlForImage'
-
-const { asset, alt, class: className } = Astro.props.node ?? Astro.props
-
-const url = urlForImage(asset).url()
-const webpUrl = urlForImage(asset).format('webp').url()
----
-
-<picture>
-  <source srcset={webpUrl} type="image/webp" />
-  <img class={className} src={url} alt={alt} />
-</picture>
- -->

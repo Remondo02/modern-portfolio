@@ -6,12 +6,12 @@ import { Github, ExternalLink } from 'lucide-react'
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro'
 import { q } from 'groqd'
 import { runQuery, projectSingleSelection } from '@/lib/project'
-import PortableText from '../../components/PortableText.astro'
+import PortableText from '@/components/PortableText.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import PortableTextImage from '@/components/PortableTextImage.astro'
 import { formatDate } from '@/lib'
 
-import {metaDescriptionSlice} from '@/lib/utils'
+import { metaDescriptionSlice } from '@/lib/utils'
 
 export const getStaticPaths = (async () => {
   async function getProjects() {
