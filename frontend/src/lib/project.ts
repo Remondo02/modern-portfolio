@@ -36,10 +36,10 @@ export const singleProjectSelection = {
         _type: q.literal('figure'),
         asset: q('asset').grabOne('_ref', q.string()),
       },
-      '_type == "image"': {
-        _type: q.literal('image'),
-        asset: q('asset').grabOne('_ref', q.string()),
-      },
+      // '_type == "image"': {
+      //   _type: q.literal('image'),
+      //   asset: q('asset').grabOne('_ref', q.string()),
+      // },
       default: {
         _key: q.string(),
         _type: ['"unsupported"', q.literal('unsupported')],
