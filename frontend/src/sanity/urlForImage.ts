@@ -3,8 +3,8 @@
 import { sanityClient } from 'sanity:client'
 import imageUrlBuilder from '@sanity/image-url'
 
-export const imageBuilder = imageUrlBuilder(sanityClient)
+type ImageUrlBuilder = ReturnType<typeof imageUrlBuilder>
+type ImageSource = Parameters<ImageUrlBuilder['image']>[0]
 
-export function urlForImage(source) {
-  return imageBuilder.image(source)
-}
+export const urlForImage = (source: ImageSource) =>
+  imageUrlBuilder(sanityClient).image(source)
