@@ -1,7 +1,7 @@
 import { type FormEvent } from 'react'
 import { useForm } from 'react-hook-form'
 
-export default function Form() {
+export function ContactForm() {
   const {
     register,
     handleSubmit,
