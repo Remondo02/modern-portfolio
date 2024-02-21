@@ -1,15 +1,9 @@
 ---
-import HeaderLink from '@/components/HeaderLink.astro'
+import { NavigationMenu } from '@/components/NavigationMenu.tsx'
 import ThemeToggle from '@/components/ThemeToggle.astro'
-import { buttonVariants } from '@/components/ui/button'
 import { HOMEPAGE_URL } from '../../config'
 
-const menuItems = [
-  { title: 'Home', path: '/' },
-  { title: 'Projects', path: '/projects' },
-  { title: 'Blog', path: '/blog' },
-  { title: 'Contact', path: '/contact' },
-]
+const pathName = Astro.url.pathname
 ---
 
 <header
@@ -25,19 +19,7 @@ const menuItems = [
     </div>
     <div class="items-center space-x-4">
       <nav class="flex items-center space-x-1">
-        {
-          menuItems.map((item) => (
-            <HeaderLink
-              href={item.path}
-              class:list={[
-                buttonVariants({ variant: 'ghost' }),
-                'transition-none',
-              ]}
-            >
-              {item.title}
-            </HeaderLink>
-          ))
-        }
+        <NavigationMenu pathName={pathName} client:idle />
       </nav>
     </div>
     <div>

@@ -1,14 +1,14 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { type Props } from '@/pages/project/[slug].astro'
+// import { type Props } from '@/pages/project/[slug].astro'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function metaDescriptionSlice(text: Props[]) {
+export function metaDescriptionSlice(text: any) {
   return text
-    .map((block) => {
+    .map((block: any) => {
       if (block._type !== 'block' || !block.children) {
         return ''
       }

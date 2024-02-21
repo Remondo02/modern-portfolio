@@ -7,8 +7,7 @@ import {
 
 interface Props {
   data: {
-    position: string
-    company: string
+    title: string
     description: string
   }[]
 }
@@ -18,8 +17,8 @@ export function Accordion({ data }: Props) {
     <BaseAccordion type="single" collapsible className="w-full">
       {data.map((item, i) => {
         return (
-          <AccordionItem value={`item-${i.toFixed()}`}>
-            <AccordionTrigger>{item.position}</AccordionTrigger>
+          <AccordionItem key={i} value={`item-${i.toFixed()}`}>
+            <AccordionTrigger>{item.title}</AccordionTrigger>
             <AccordionContent>{item.description}</AccordionContent>
           </AccordionItem>
         )
