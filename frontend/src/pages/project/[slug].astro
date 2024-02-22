@@ -108,7 +108,7 @@ const { ...project } = Astro.props
           <PortableTextImage
             asset={project.mainImage}
             alt={project.mainImage?.altText}
-            class="mb-8 aspect-video w-full rounded-lg object-cover "
+            class="mb-8 aspect-video w-full rounded-lg border object-cover"
           />
         )
       }
@@ -118,7 +118,7 @@ const { ...project } = Astro.props
             <PortableTextImage
               asset={projectImage}
               alt={projectImage?.altText}
-              class="mb-8 aspect-video w-full rounded-lg object-cover "
+              class="mb-8 aspect-video w-full rounded-lg border object-cover"
             />
           ))
       }
