@@ -2,6 +2,7 @@
 import Footer from '@/components/Footer.astro'
 import HeadSEO from '@/components/HeadSEO.astro'
 import Header from '@/components/Header.astro'
+import { Toaster } from '@/components/ui/toaster'
 import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
@@ -52,6 +53,7 @@ const {
         class:list={['mx-auto w-full flex-auto px-8 py-16 md:py-20', className]}
       >
         <slot />
+        <Toaster client:idle />
       </main>
       <Footer />
     </div>

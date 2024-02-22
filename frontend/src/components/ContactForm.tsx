@@ -1,6 +1,5 @@
-// import { type FormEvent } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -15,6 +14,7 @@ import {
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 
 export function ContactForm() {
   const formSchema = z.object({
@@ -39,6 +39,32 @@ export function ContactForm() {
     },
   })
 
+  function showToast(isValidate: string) {
+    const validated = isValidate === 'ok'
+
+    const message = {
+      validate: {
+        title: 'Message send',
+        description:
+          "Your message have been successfully send, I'll come back to you as soon as possible.",
+      },
+      error: {
+        title: 'Error',
+        description: 'An error happened, please try again later.',
+      },
+    }
+
+    const title = validated ? message.validate.title : message.error.title
+    const description = validated
+      ? message.validate.description
+      : message.error.description
+
+    return toast({
+      title: title,
+      description: description,
+    })
+  }
+
   const onSubmit = async (
     data: z.infer<typeof formSchema>,
     event: React.BaseSyntheticEvent | undefined,
@@ -61,9 +87,11 @@ export function ContactForm() {
       const r = await res.json()
       {
         console.log(r)
+        showToast('ok')
       }
     } catch (error) {
       console.log(error)
+      showToast('error')
     }
   }
 
