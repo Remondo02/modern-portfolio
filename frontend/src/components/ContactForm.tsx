@@ -1,15 +1,49 @@
-import { type FormEvent } from 'react'
-import { useForm } from 'react-hook-form'
+// import { type FormEvent } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, type SubmitHandler } from 'react-hook-form'
+import { z } from 'zod'
+
+import { Button } from '@/components/ui/button'
+import {
+  Form as ShadcnForm,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 
 export function ContactForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    formState,
-  } = useForm()
+  const formSchema = z.object({
+    name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
+    email: z.string().email({ message: 'Invalid email address.' }),
+    message: z
+      .string()
+      .min(10, {
+        message: 'Message must be at least 10 characters.',
+      })
+      .max(160, {
+        message: 'Message must not be longer than 30 characters.',
+      }),
+  })
 
-  const onSubmit = async (data) => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  })
+
+  const onSubmit = async (
+    data: z.infer<typeof formSchema>,
+    event: React.BaseSyntheticEvent | undefined,
+  ) => {
+    event?.preventDefault()
     try {
       const res = await fetch('/api/sendEmail.json', {
         method: 'POST',
@@ -25,27 +59,67 @@ export function ContactForm() {
         }),
       })
       const r = await res.json()
-      console.log(r)
+      {
+        console.log(r)
+      }
     } catch (error) {
-      console.error(error)
+      console.log(error)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name">
-        Name
-        <input placeholder="Name" {...register('name')} />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input placeholder="Bill" {...register('email')} />
-      </label>
-      <label htmlFor="message">
-        Message
-        <textarea {...register('message')} />
-      </label>
-      <button>Send</button>
-    </form>
+    <ShadcnForm {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-6 sm:w-2/3"
+      >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Your email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Message</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Your message"
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className="transition-none" type="submit">
+          Submit
+        </Button>
+      </form>
+    </ShadcnForm>
   )
 }

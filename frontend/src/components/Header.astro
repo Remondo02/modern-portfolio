@@ -23,7 +23,7 @@ const pathName: string = Astro.url.pathname
     <div
       class="flex flex-row-reverse justify-between gap-1 md:w-full md:flex-row md:gap-0"
     >
-      <NavigationMenu pathName={pathName} client:idle />
+      <NavigationMenu pathName={pathName} client:load />
       <ThemeToggle />
     </div>
   </div>
