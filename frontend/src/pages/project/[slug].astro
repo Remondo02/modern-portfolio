@@ -37,7 +37,7 @@ const { ...project } = Astro.props
 ---
 
 <BaseLayout
-  title={project.title}
+  title={`Project - ${project.title}`}
   description={metaDescriptionSlice(project.body)}
 >
   <section class="grid items-center">
