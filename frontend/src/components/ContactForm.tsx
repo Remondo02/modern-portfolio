@@ -15,6 +15,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import { useEffect } from 'react'
 
 export function ContactForm() {
   const formSchema = z.object({
@@ -25,8 +26,8 @@ export function ContactForm() {
       .min(10, {
         message: 'Message must be at least 10 characters.',
       })
-      .max(160, {
-        message: 'Message must not be longer than 30 characters.',
+      .max(500, {
+        message: 'Message must not be longer than 500 characters.',
       }),
   })
 
@@ -38,6 +39,14 @@ export function ContactForm() {
       message: '',
     },
   })
+
+  useEffect(() => {
+    form.reset({
+      name: '',
+      email: '',
+      message: '',
+    })
+  }, [form.formState.isSubmitSuccessful])
 
   function showToast(isValidate: string) {
     const validated = isValidate === 'ok'

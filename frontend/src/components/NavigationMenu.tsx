@@ -25,10 +25,10 @@ const menuItems: { title: string; href: string }[] = [
     title: 'Projects',
     href: '/projects',
   },
-  {
-    title: 'Blog',
-    href: '/blog',
-  },
+  // {
+  //   title: 'Blog',
+  //   href: '/blog',
+  // },
   {
     title: 'Contact',
     href: '/contact',
