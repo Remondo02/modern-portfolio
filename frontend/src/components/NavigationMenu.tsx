@@ -10,6 +10,8 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 
+import { Menu } from 'lucide-react'
+
 interface Props {
   pathName: string
 }
@@ -39,7 +41,10 @@ export function NavigationMenu({ pathName }: Props) {
     <NavigationMenuUi>
       <NavigationMenuList>
         {menuItems.map((menuItem) => (
-          <NavigationMenuItem key={menuItem.title}>
+          <NavigationMenuItem
+            key={menuItem.title}
+            className="hidden md:inline-block"
+          >
             <NavigationMenuLink
               active={
                 menuItem.href ===
@@ -52,6 +57,22 @@ export function NavigationMenu({ pathName }: Props) {
             </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
+        <NavigationMenuItem className="inline-block md:hidden">
+          <NavigationMenuTrigger className="transition-none">
+            <Menu />
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="w-[200px] gap-3 p-4">
+              {menuItems.map((menuItem) => (
+                <ListItem
+                  key={menuItem.title}
+                  title={menuItem.title}
+                  href={menuItem.href}
+                />
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenuUi>
   )
