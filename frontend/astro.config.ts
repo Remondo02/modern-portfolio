@@ -19,6 +19,7 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       token: import.meta.env.VITE_SANITY_TOKEN,
+      studioBasePath: "/admin",
     }),
   ],
 })
