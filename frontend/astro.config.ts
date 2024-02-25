@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import tailwind from '@astrojs/tailwind'
 import { HOMEPAGE_URL } from './config'
+import netlify from '@astrojs/netlify'
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +20,8 @@ export default defineConfig({
       // Set useCdn to false if you're building statically.
       useCdn: false,
       token: import.meta.env.VITE_SANITY_TOKEN,
-      studioBasePath: "/admin",
+      studioBasePath: '/admin',
     }),
   ],
+  adapter: netlify(),
 })

@@ -1,12 +1,12 @@
-import {defineConfig} from 'sanity'
-import { deskTool } from "sanity/desk";
+import { defineConfig } from 'sanity'
+import { deskTool } from 'sanity/desk'
 
-import {schemaTypes} from '../studio/schemas'
+import { schemaTypes } from '../studio/schemas'
 
 export default defineConfig({
   name: 'default',
   title: 'portfolio',
-  projectId: "f3coktq6",
+  projectId: 'f3coktq6',
   dataset: 'production',
   plugins: [deskTool()],
   schema: {
