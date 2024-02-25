@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-// import { type Props } from '@/pages/project/[slug].astro'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

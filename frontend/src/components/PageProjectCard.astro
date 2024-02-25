@@ -1,5 +1,5 @@
 ---
-import PortableTextImage from '@/components/PortableTextImage.astro'
+import { SanityImage } from '@/components/SanityImage'
 import { Badge } from '@/components/ui/badge'
 import { type PageProjectsProps } from './../lib/project'
 
@@ -15,10 +15,11 @@ const { project } = Astro.props
     <div class="flex flex-col space-y-1.5 p-0">
       {
         project.mainImage && (
-          <PortableTextImage
-            asset={project.mainImage}
+          <SanityImage
+            id={project.mainImage.asset._ref}
             alt={project.mainImage?.altText}
-            class="aspect-video w-full rounded-t-lg object-cover"
+            width={720}
+            className="aspect-video w-full rounded-t-lg object-cover"
           />
         )
       }

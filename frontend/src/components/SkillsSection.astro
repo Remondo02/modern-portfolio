@@ -19,7 +19,7 @@ import tailwind from '@/assets/images/tailwind.png'
 import typescript from '@/assets/images/typescript.png'
 import wordpress from '@/assets/images/wordpress.png'
 
-const skills = [
+const skills: { image: string; title: string }[] = [
   {
     image: astro,
     title: 'Astro',
@@ -89,6 +89,9 @@ const skills = [
     title: 'WordPress',
   },
 ]
+
+type Props = Record<string, never>
+const {} = Astro.props
 ---
 
 <section class="gap-6 pt-6 md:pt-10">

@@ -5,7 +5,6 @@ import {
   type TypeFromSelection,
   type Selection,
   sanityImage,
-  nullToUndefined,
 } from 'groqd'
 
 const altText = {

@@ -1,6 +1,9 @@
 ---
 import { Button } from '@/components/ui/button'
 import { Moon, Sun } from 'lucide-react'
+
+type Props = Record<string, never>
+const {} = Astro.props
 ---
 
 <Button
@@ -35,7 +38,7 @@ import { Moon, Sun } from 'lucide-react'
       document.documentElement.classList.add('dark')
     }
 
-    window.localStorage.setItem('theme', theme)
+    window.localStorage.setItem('theme', theme!)
 
     const handleToggleClick = () => {
       const element = document.documentElement
@@ -46,7 +49,7 @@ import { Moon, Sun } from 'lucide-react'
     }
 
     document
-      .getElementById('themeToggle')
+      .getElementById('themeToggle')!
       .addEventListener('click', handleToggleClick)
   })
 </script>
