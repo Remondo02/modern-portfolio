@@ -14,6 +14,7 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import { LoadingSpinner } from './LoadingSpinner.tsx'
 import { useEffect } from 'react'
 
 export function ContactForm() {
@@ -68,7 +69,6 @@ export function ContactForm() {
       : message.error.description
 
     return toast({
-      duration: 50000,
       variant: validated ? "default" : "destructive",
       title: title,
       description: description,
@@ -91,17 +91,17 @@ export function ContactForm() {
           from: 'onboarding@resend.dev',
           to: 'remi.meullemeestre@gmail.com',
           subject: `Contact de ${data.name}, ${data.email}`,
-          // html: data.message,
+          html: data.message,
           text: data.message,
         }),
       })
       const r = await res.json()
       {
-        console.log(typeof r)
+        console.log(r)
         showToast('ok')
       }
     } catch (error) {
-      console.log(typeof error)
+      console.log(error)
       showToast('error')
     }
   }
@@ -157,7 +157,8 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button className="transition-none" type="submit">
+        <Button disabled={form.formState.isSubmitting} className="transition-none" type="submit">
+          {form.formState.isSubmitting && <LoadingSpinner />}
           Submit
         </Button>
       </form>
