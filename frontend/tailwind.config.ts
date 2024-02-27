@@ -80,6 +80,8 @@ const config = {
     plugin(function ({ addVariant }) {
       addVariant('paragraph', '&>p')
       addVariant('anchor', '&>p>a')
+      addVariant('list', '&>ul')
+      addVariant('listItem', '&>ul>li')
     }),
   ],
 } satisfies Config

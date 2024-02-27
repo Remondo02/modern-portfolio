@@ -158,7 +158,7 @@ export function ContactForm() {
           )}
         />
         <Button disabled={form.formState.isSubmitting} className="transition-none" type="submit">
-          {form.formState.isSubmitting && <LoadingSpinner />}
+          {form.formState.isSubmitting && <LoadingSpinner className="mr-1" />}
           Submit
         </Button>
       </form>
