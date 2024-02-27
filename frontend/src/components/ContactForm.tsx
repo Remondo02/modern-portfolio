@@ -68,8 +68,11 @@ export function ContactForm() {
       : message.error.description
 
     return toast({
+      duration: 50000,
+      variant: validated ? "default" : "destructive",
       title: title,
       description: description,
+      style: {zIndex: 51}
     })
   }
 
@@ -88,17 +91,17 @@ export function ContactForm() {
           from: 'onboarding@resend.dev',
           to: 'remi.meullemeestre@gmail.com',
           subject: `Contact de ${data.name}, ${data.email}`,
-          html: data.message,
+          // html: data.message,
           text: data.message,
         }),
       })
       const r = await res.json()
       {
-        console.log(r)
+        console.log(typeof r)
         showToast('ok')
       }
     } catch (error) {
-      console.log(error)
+      console.log(typeof error)
       showToast('error')
     }
   }
