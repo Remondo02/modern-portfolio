@@ -8,10 +8,9 @@ interface Props {
 }
 
 const { project } = Astro.props
-const origin = Astro.url.origin
 ---
 
-<a href={`${origin}/project/${project.slug}`} class="h-fit">
+<a href={`projects/${project.slug}`} class="h-fit">
   <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
     <div class="flex flex-col space-y-1.5 p-0">
       {
