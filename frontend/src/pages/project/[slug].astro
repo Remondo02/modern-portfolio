@@ -105,32 +105,24 @@ export const prerender = true
       }
       {
         project.mainImage && (
-          // <PortableTextImage
-          //   asset={project.mainImage}
-          //   alt={project.mainImage?.altText}
-          //   class="mb-8 aspect-video w-full rounded-lg border object-cover"
-          // />
           <SanityImage
             id={project.mainImage.asset._ref}
             alt={project.mainImage?.altText}
-            width={720}
-            className="mb-8 aspect-video w-full rounded-lg border object-cover"
+            width={1280}
+            sizes="(max-width: 767px) 720px, (min-width: 768px) 1280px"
+            className="mb-8 aspect-video rounded-lg border object-cover"
           />
         )
       }
       {
         project.projectImages &&
           project.projectImages.map((projectImage) => (
-            // <PortableTextImage
-            //   asset={projectImage}
-            //   alt={projectImage?.altText}
-            //   class="mb-8 aspect-video w-full rounded-lg border object-cover"
-            // />
             <SanityImage
               id={projectImage.asset._ref}
               alt={projectImage?.altText}
-              width={720}
-              className="mb-8 aspect-video w-full rounded-lg border object-cover"
+              width={1280}
+              sizes="(max-width: 767px) 720px, (min-width: 768px) 1280px"
+              className="mb-8 aspect-video rounded-lg border object-cover"
             />
           ))
       }

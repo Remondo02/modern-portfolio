@@ -18,8 +18,9 @@ const { project } = Astro.props
           <SanityImage
             id={project.mainImage.asset._ref}
             alt={project.mainImage?.altText}
-            width={720}
-            className="aspect-video w-full rounded-t-lg object-cover"
+            width={1280}
+            sizes="(max-width: 767px) 1280px, (min-width: 768px) 720px"
+            className="aspect-video rounded-t-lg object-cover"
           />
         )
       }
