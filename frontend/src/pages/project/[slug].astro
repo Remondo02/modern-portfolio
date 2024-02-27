@@ -1,15 +1,14 @@
 ---
+import PortableText from '@/components/PortableText.astro'
+import { SanityImage } from '@/components/SanityImage'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
-import { ExternalLink, Github } from 'lucide-react'
-
-import PortableText from '@/components/PortableText.astro'
-import PortableTextImage from '@/components/PortableTextImage.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate } from '@/lib'
 import { projectSingleSelection, runQuery } from '@/lib/project'
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 import { q } from 'groqd'
+import { ExternalLink, Github } from 'lucide-react'
 
 import { metaDescriptionSlice } from '@/lib/utils'
 
@@ -34,7 +33,7 @@ export const getStaticPaths = (async () => {
 export type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { ...project } = Astro.props
-export const prerender = true;
+export const prerender = true
 ---
 
 <BaseLayout
@@ -106,20 +105,32 @@ export const prerender = true;
       }
       {
         project.mainImage && (
-          <PortableTextImage
-            asset={project.mainImage}
+          // <PortableTextImage
+          //   asset={project.mainImage}
+          //   alt={project.mainImage?.altText}
+          //   class="mb-8 aspect-video w-full rounded-lg border object-cover"
+          // />
+          <SanityImage
+            id={project.mainImage.asset._ref}
             alt={project.mainImage?.altText}
-            class="mb-8 aspect-video w-full rounded-lg border object-cover"
+            width={720}
+            className="mb-8 aspect-video w-full rounded-lg border object-cover"
           />
         )
       }
       {
         project.projectImages &&
           project.projectImages.map((projectImage) => (
-            <PortableTextImage
-              asset={projectImage}
+            // <PortableTextImage
+            //   asset={projectImage}
+            //   alt={projectImage?.altText}
+            //   class="mb-8 aspect-video w-full rounded-lg border object-cover"
+            // />
+            <SanityImage
+              id={projectImage.asset._ref}
               alt={projectImage?.altText}
-              class="mb-8 aspect-video w-full rounded-lg border object-cover"
+              width={720}
+              className="mb-8 aspect-video w-full rounded-lg border object-cover"
             />
           ))
       }
