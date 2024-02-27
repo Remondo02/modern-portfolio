@@ -2,6 +2,7 @@
 import { SanityImage } from '@/components/SanityImage'
 import { Badge } from '@/components/ui/badge'
 import { type PageProjectsProps } from './../lib/project'
+import { HOMEPAGE_URL } from '../../config'
 
 interface Props {
   project: PageProjectsProps
@@ -10,7 +11,7 @@ interface Props {
 const { project } = Astro.props
 ---
 
-<a href={`project/${project.slug}`} class="h-fit">
+<a href={`${HOMEPAGE_URL}/project/${project.slug}`} class="h-fit">
   <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
     <div class="flex flex-col space-y-1.5 p-0">
       {

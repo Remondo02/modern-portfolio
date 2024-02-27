@@ -106,6 +106,8 @@ export function ContactForm() {
   return (
     <ShadcnForm {...form}>
       <form
+        name="contact"
+        data-netlify="true"
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full space-y-6 sm:w-2/3"
       >
