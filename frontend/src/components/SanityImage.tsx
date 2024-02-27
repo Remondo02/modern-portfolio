@@ -9,4 +9,4 @@ export const SanityImage = (
     React.ComponentProps<typeof SanityImageLib>,
     'baseUrl' | 'dataset' | 'projectId'
   >,
-): Props => <SanityImageLib baseUrl={baseUrl} {...props} />
+) => <SanityImageLib id={props.id} baseUrl={baseUrl} {...props} />
