@@ -58,10 +58,13 @@ export function NavigationMenu({ pathName }: Props) {
           </NavigationMenuItem>
         ))}
         <NavigationMenuItem className="inline-block md:hidden">
-          <NavigationMenuTrigger className="transition-none" aria-label="Mobile Navigation Button">
+          <NavigationMenuTrigger
+            className="transition-none"
+            aria-label="Mobile Navigation Button"
+          >
             <Menu />
           </NavigationMenuTrigger>
-          <NavigationMenuContent >
+          <NavigationMenuContent>
             <ul className="w-[200px] gap-3 p-4">
               {menuItems.map((menuItem) => (
                 <ListItem

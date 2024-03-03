@@ -1,3 +1,5 @@
+import { SlugRule, TextRule } from "sanity";
+
 export const projectSchema = [
   {
     name: 'project',
@@ -13,7 +15,7 @@ export const projectSchema = [
         name: 'slug',
         title: 'Slug',
         type: 'slug',
-        validation: (Rule) => Rule.required(),
+        validation: (Rule: SlugRule) => Rule.required(),
         options: {
           source: 'title',
           maxLength: 96,
@@ -24,7 +26,7 @@ export const projectSchema = [
         title: 'Excerpt',
         type: 'text',
         rows: 4,
-        validation: (Rule) => Rule.required().min(80).max(160),
+        validation: (Rule: TextRule) => Rule.required().min(80).max(160),
       },
       {
         name: 'mainImage',

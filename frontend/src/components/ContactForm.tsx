@@ -69,10 +69,10 @@ export function ContactForm() {
       : message.error.description
 
     return toast({
-      variant: validated ? "default" : "destructive",
+      variant: validated ? 'default' : 'destructive',
       title: title,
       description: description,
-      style: {zIndex: 51}
+      style: { zIndex: 51 },
     })
   }
 
@@ -157,7 +157,11 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button disabled={form.formState.isSubmitting} className="transition-none" type="submit">
+        <Button
+          disabled={form.formState.isSubmitting}
+          className="transition-none"
+          type="submit"
+        >
           {form.formState.isSubmitting && <LoadingSpinner className="mr-1" />}
           Submit
         </Button>
