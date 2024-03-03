@@ -8,6 +8,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["./src/env.d.ts", "**/*.ts", "**/*.tsx", "**/*.astro"],
   "exclude": ["dist"]
 }
