@@ -7,6 +7,12 @@ import {
   sanityImage,
 } from 'groqd'
 
+export const skillSelection = {
+  title: q.string(),
+  featuredSkill: q.boolean(),
+  logo: sanityImage('logo').nullable(),
+} satisfies Selection
+
 const altText = {
   altText: q.string().nullable(),
 } satisfies Selection

@@ -9,6 +9,18 @@ export const skillSchema = [
         title: 'Title',
         type: 'string',
       },
+      {
+        name: 'featuredSkill',
+        title: 'Mis en avant',
+        type: 'boolean',
+        initialValue: false,
+      },
+      {
+        name: 'logo',
+        title: 'Logo',
+        type: 'image',
+        hidden: ({ document }) => !document.featuredSkill
+      },
     ],
   },
 ]

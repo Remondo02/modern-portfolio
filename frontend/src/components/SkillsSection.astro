@@ -1,97 +1,22 @@
 ---
-import { Image } from 'astro:assets'
+import { SanityImage } from '@/components/SanityImage'
+import { runQuery, skillSelection } from '@/lib/project.ts'
+import { q, type InferType } from 'groqd'
 
-import astro from '@/assets/images/astro.png'
-import bootstrap from '@/assets/images/bootstrap.png'
-import css from '@/assets/images/css.png'
-import figma from '@/assets/images/figma.png'
-import git from '@/assets/images/git.png'
-import html from '@/assets/images/html.png'
-import javascript from '@/assets/images/javascript.png'
-import mui from '@/assets/images/mui.png'
-import node from '@/assets/images/node.png'
-import php from '@/assets/images/php.png'
-import react from '@/assets/images/react.png'
-import redux from '@/assets/images/redux.png'
-import sanity from '@/assets/images/sanity.png'
-import sass from '@/assets/images/sass.png'
-import tailwind from '@/assets/images/tailwind.png'
-import typescript from '@/assets/images/typescript.png'
-import wordpress from '@/assets/images/wordpress.png'
+const query = q('*')
+  .filterByType('skill')
+  .filter('featuredSkill == true')
+  .grab(skillSelection)
 
-const skills: { image: ImageMetadata; title: string }[] = [
-  {
-    image: astro,
-    title: 'Astro',
-  },
-  {
-    image: bootstrap,
-    title: 'Bootstrap',
-  },
-  {
-    image: css,
-    title: 'CSS3',
-  },
-  {
-    image: figma,
-    title: 'Figma',
-  },
-  {
-    image: git,
-    title: 'Git',
-  },
-  {
-    image: html,
-    title: 'HTML5',
-  },
-  {
-    image: javascript,
-    title: 'JavaScript',
-  },
-  {
-    image: mui,
-    title: 'Material UI',
-  },
-  {
-    image: node,
-    title: 'Node JS',
-  },
-  {
-    image: php,
-    title: 'PHP',
-  },
-  {
-    image: react,
-    title: 'React JS',
-  },
-  {
-    image: redux,
-    title: 'Redux',
-  },
-  {
-    image: sanity,
-    title: 'Sanity',
-  },
-  {
-    image: sass,
-    title: 'Sass',
-  },
-  {
-    image: tailwind,
-    title: 'Tailwind',
-  },
-  {
-    image: typescript,
-    title: 'TypeScript',
-  },
-  {
-    image: wordpress,
-    title: 'WordPress',
-  },
-]
+async function getSkills() {
+  return runQuery(query)
+}
 
-type Props = Record<string, never>
-const {} = Astro.props
+type Skills = InferType<typeof query>
+
+const skills: Skills = await getSkills()
+
+export const prerender = true
 ---
 
 <section class="gap-6 pt-6 md:pt-10">
@@ -107,17 +32,21 @@ const {} = Astro.props
           return (
             <div class="flex flex-col items-center">
               <div class="mb-2 flex h-16 w-16 rounded-full bg-secondary p-4">
-                <Image
-                  src={skill.image}
-                  alt={`Logo ${skill.title}`}
-                  class="flex-shrink-0 object-contain"
-                  width="64"
-                  height="64"
-                />
+                {skill.logo && (
+                  <SanityImage
+                    id={skill.logo?.asset._ref}
+                    alt={`Logo ${skill.title ? skill.title : ''}`}
+                    className="flex-shrink-0 object-contain"
+                    width={64}
+                    height={64}
+                  />
+                )}
               </div>
-              <p class="hyphens-auto text-justify text-sm text-muted-foreground">
-                {skill.title}
-              </p>
+              {skill.title && (
+                <p class="hyphens-auto text-justify text-sm text-muted-foreground">
+                  {skill.title}
+                </p>
+              )}
             </div>
           )
         })
