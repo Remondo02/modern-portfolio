@@ -4,13 +4,12 @@ import { SanityImage } from '@/components/SanityImage'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { formatDate } from '@/lib'
+import { formatDate, metaDescriptionSlice } from '@/lib/utils'
+import { runQuery } from '@/sanity'
 import {
   projectSingleSelection,
-  runQuery,
   type SingleProjectsProps,
-} from '@/lib/project'
-import { metaDescriptionSlice } from '@/lib/utils'
+} from '@/sanity/projects'
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 import { q } from 'groqd'
 import { ExternalLink, Github } from 'lucide-react'

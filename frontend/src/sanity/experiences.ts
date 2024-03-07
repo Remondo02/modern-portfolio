@@ -1,0 +1,13 @@
+import { q, type TypeFromSelection, type Selection } from 'groqd'
+import { bodySelection } from './commonSelection'
+
+export const experienceSelection = {
+  ...bodySelection,
+  position: q.string(),
+  company: q.string(),
+  startDate: ['startDate', q.string()],
+  endDate: ['endDate', q.string().nullable()],
+  endDateOrActive: q.boolean(),
+} satisfies Selection
+
+export type ExperiencesProps = TypeFromSelection<typeof experienceSelection>

@@ -1,6 +1,7 @@
 ---
 import { SanityImage } from '@/components/SanityImage'
-import { runQuery, skillSelection } from '@/lib/project.ts'
+import { runQuery } from '@/sanity'
+import { skillSelection } from '@/sanity/skills'
 import { q, type InferType } from 'groqd'
 
 const query = q('*')

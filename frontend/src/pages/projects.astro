@@ -1,11 +1,8 @@
 ---
 import PageProjectCard from '@/components/PageProjectCard.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import {
-  projectPageSelection,
-  runQuery,
-  type PageProjectsProps,
-} from '@/lib/project'
+import { runQuery } from '@/sanity'
+import { projectPageSelection, type PageProjectsProps } from '@/sanity/projects'
 import { q } from 'groqd'
 
 async function getProjects() {
