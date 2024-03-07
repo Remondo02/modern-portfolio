@@ -1,6 +1,21 @@
 ---
-type Props = Record<string, never>
-const {} = Astro.props
+import PortableText from '@/components/PortableText.astro'
+import { formatDate } from '@/lib'
+import { experienceSelection, runQuery } from '@/lib/project.ts'
+import { q, type InferType } from 'groqd'
+
+const query = q('*')
+  .filter("_type == 'experience'")
+  .grab(experienceSelection)
+  .order('startDate desc')
+
+type Experiences = InferType<typeof query>
+
+async function getExperiences() {
+  return runQuery(query)
+}
+
+const experiences: Experiences = await getExperiences()
 ---
 
 <section class="flex flex-col items-start gap-6 pb-8 pt-6 md:py-10">
@@ -11,157 +26,29 @@ const {} = Astro.props
       EXPERIENCES
     </h2>
     <div class="flex flex-col">
-      <div class="gap-10 pb-10 md:flex">
-        <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
-          Nov 2023 - Present
-        </p>
-        <div class="md:w-3/4">
-          <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
-            Full Stack Web Developer
-          </p>
-          <p class="pb-5 text-base font-medium leading-tight tracking-tight">
-            Independant / Freelance
-          </p>
-          <p class="hyphens-auto text-justify text-base text-muted-foreground">
-            In order to obtain a new job as a web developer (Front End or Full
-            Stack), I'm now working on personal projects. Using industry
-            standards <span class="font-bold">React</span>, <span
-              class="font-bold"
-            >
-              Redux</span
-            >, <span class="font-bold">Redux Toolkit</span>, <span
-              class="font-bold"
-            >
-              MUI</span
-            >, <span class="font-bold">RapidAPI</span>, and a few other
-            libraries, I recently designed, developed, and implemented an online
-            cryptocurrency web application. I also created a blog with CRUD
-            features using <span class="font-bold">Node</span>, <span
-              class="font-bold"
-            >
-              Express</span
-            >, and <span class="font-bold">MongoDB</span>. Lastly, this
-            portfolio employs <span class="font-bold">Tailwind</span>, <span
-              class="font-bold"
-            >
-              Sanity</span
-            >, <span class="font-bold">Shadcn/ui</span>, <span
-              class="font-bold"
-            >
-              TypeScript</span
-            >, <span class="font-bold">Astro</span>, and <span class="font-bold"
-              >React</span
-            >.
-          </p>
-        </div>
-      </div>
-      <div class="gap-10 pb-10 md:flex">
-        <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
-          Nov 2019 - May 2023
-        </p>
-        <div class="md:w-3/4">
-          <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
-            Full Stack Web Developer
-          </p>
-          <p class="pb-5 text-base font-medium leading-tight tracking-tight">
-            Group Eductive - Réseau GES
-          </p>
-          <p class="hyphens-auto text-justify text-base text-muted-foreground">
-            The scope of work was quite broad: from building and maintaining
-            websites using the <span class="font-bold">WordPress</span> content management
-            system and the <span class="font-bold"
-              >"in-house" PHP framework</span
-            > (which manages over 40 domains and 25 brands) to developing and expanding
-            that framework, fixing technical audits (<span class="font-bold"
-              >quality</span
-            >, <span class="font-bold">SEO</span>
-            <span class="font-bold">security</span>, <span class="font-bold"
-              >caching policy</span
-            >, <span class="font-bold">rendering optimization</span>),
-            organizing and facilitating workshops to address technical problems
-            and suggest new ideas and tools with the team, and supporting the
-            migration of all sites from Gandi to Ecritel and, more recently,
-            Microsoft Azure.<br class="mb-4 hidden sm:inline" />
-            In addition, I had to work with the Infrastructure and Networks department
-            to setup files for the build and deployment of Docker images in both
-            pre-production and production environments, as well as work with <span
-              class="font-bold">Microsoft Azure</span
-            >, <span class="font-bold">Kubernetes</span>, <span
-              class="font-bold">Docker</span
-            >, and <span class="font-bold">CI-CD</span>; <span class="font-bold"
-              >Azure-cli</span
-            >, <span class="font-bold">k8s</span> files, managing pods and containers.<br
-              class="mb-4 hidden sm:inline"
-            />
-            Ultimately, my goal was to enhance the team's workflow and tools, which
-            resulted in the creation of a documentation tailored to the group's requirements
-            and the significant technological advancement symbolized by the release
-            of the Gutenberg content editor. I also took part in the implementation
-            of this documentation in tandem with the team, utilizing tools like <span
-              class="font-bold">Composer</span
-            >, <span class="font-bold">Timber</span>, <span class="font-bold"
-              >Twig</span
-            >, <span class="font-bold">Extended ACF</span> (Vinkla), <span
-              class="font-bold">Webpack</span
-            >, <span class="font-bold">SASS</span>, etc.
-          </p>
-        </div>
-      </div>
-      <div class="gap-10 pb-10 md:flex">
-        <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
-          May - Jul 2019
-        </p>
-        <div class="md:w-3/4">
-          <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
-            WordPress Developer
-          </p>
-          <p class="pb-5 text-base font-medium leading-tight tracking-tight">
-            Health Behaviour in Motion
-          </p>
-          <p class="hyphens-auto text-justify text-base text-muted-foreground">
-            I worked with <span class="font-bold">PHP</span>, <span
-              class="font-bold">JavaScript</span
-            >, <span class="font-bold">HTML 5</span>, and <span
-              class="font-bold">CSS 3</span
-            > to create and integrate new <span class="font-bold"
-              >WordPress</span
-            > features. This involved merging content, managing three WordPress multi-sites'
-            back ends, deploying "child themes," and resolving bugs. I also utilize
-            plugins like <span class="font-bold">Woocommerce</span>, <span
-              class="font-bold">Loco Translate</span
-            >, <span class="font-bold">Leardash</span>, <span class="font-bold"
-              >Uncanny Own</span
-            >, and <span class="font-bold">Elementor</span>. Finally, I helped
-            with the logotyping and photo editing for the "Learn X" concept.
-          </p>
-        </div>
-      </div>
-      <div class="gap-10 md:flex">
-        <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
-          Mar - Apr 2019
-        </p>
-        <div class="md:w-3/4">
-          <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
-            Web Developer / Project Manager
-          </p>
-          <p class="pb-5 text-base font-medium leading-tight tracking-tight">
-            O'Clock
-          </p>
-          <p class="hyphens-auto text-justify text-base text-muted-foreground">
-            My team and I had less than three weeks to completely build a
-            website from scratch. I was in charge of coming up with the concept,
-            designing the wireframe, making the website and logo, and
-            configuring a special
-            <span class="font-bold">WordPress</span> installation. I created WordPress
-            templates and registered custom fields after adding Weather API with
-            <span class="font-bold">JavaScript</span> and using <span
-              class="font-bold"
-            >
-              SASS
-            </span> to partially integrate the styles.
-          </p>
-        </div>
-      </div>
+      {
+        experiences.map((experience) => (
+          <div class="gap-10 pb-10 last:pb-0 md:flex">
+            <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
+              {formatDate(experience.startDate, 'short', false)} -
+              {experience.endDate
+                ? formatDate(experience.endDate, 'short', false)
+                : 'Present'}
+            </p>
+            <div class="md:w-3/4">
+              <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
+                {experience.position}
+              </p>
+              <p class="pb-5 text-base font-medium leading-tight tracking-tight">
+                {experience.company}
+              </p>
+              <div class="text-justify text-base text-muted-foreground paragraph:inline  paragraph:hyphens-auto anchor:font-medium anchor:underline anchor:underline-offset-4 list:mb-0 list:mt-5 list:list-disc list:pl-6 listItem:my-2 listItem:pl-1.5   paragraph:sm:block [&>*+*]:sm:mb-4 [&>*:last-child]:sm:mb-0">
+                <PortableText portableText={experience.body} />
+              </div>
+            </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

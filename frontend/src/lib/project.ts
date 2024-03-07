@@ -13,6 +13,19 @@ export const skillSelection = {
   logo: sanityImage('logo').nullable(),
 } satisfies Selection
 
+export const experienceSelection = {
+  body: q('body')
+    .filter()
+    .select({
+      '_type == "block"': ['{...}', q.contentBlock()],
+    }),
+  position: q.string(),
+  company: q.string(),
+  startDate: ['startDate', q.string()],
+  endDate: ['endDate', q.string().nullable()],
+  endDateOrActive: q.boolean(),
+} satisfies Selection
+
 const altText = {
   altText: q.string().nullable(),
 } satisfies Selection

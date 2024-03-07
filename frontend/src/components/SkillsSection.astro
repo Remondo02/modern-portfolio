@@ -8,15 +8,13 @@ const query = q('*')
   .filter('featuredSkill == true')
   .grab(skillSelection)
 
+type Skills = InferType<typeof query>
+
 async function getSkills() {
   return runQuery(query)
 }
 
-type Skills = InferType<typeof query>
-
 const skills: Skills = await getSkills()
-
-export const prerender = true
 ---
 
 <section class="gap-6 pt-6 md:pt-10">
@@ -42,11 +40,9 @@ export const prerender = true
                   />
                 )}
               </div>
-              {skill.title && (
-                <p class="hyphens-auto text-justify text-sm text-muted-foreground">
-                  {skill.title}
-                </p>
-              )}
+              <p class="hyphens-auto text-justify text-sm text-muted-foreground">
+                {skill.title}
+              </p>
             </div>
           )
         })
