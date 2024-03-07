@@ -40,9 +40,11 @@ const skills: Skills = await getSkills()
                   />
                 )}
               </div>
-              <p class="hyphens-auto text-justify text-sm text-muted-foreground">
-                {skill.title}
-              </p>
+              {skill.title && (
+                <p class="hyphens-auto text-justify text-sm text-muted-foreground">
+                  {skill.title}
+                </p>
+              )}
             </div>
           )
         })

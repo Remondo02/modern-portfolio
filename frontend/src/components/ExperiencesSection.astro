@@ -1,21 +1,23 @@
 ---
 import PortableText from '@/components/PortableText.astro'
 import { formatDate } from '@/lib'
-import { experienceSelection, runQuery } from '@/lib/project.ts'
-import { q, type InferType } from 'groqd'
+import {
+  experienceSelection,
+  runQuery,
+  type ExperiencesProps,
+} from '@/lib/project.ts'
+import { q } from 'groqd'
 
 const query = q('*')
   .filter("_type == 'experience'")
   .grab(experienceSelection)
   .order('startDate desc')
 
-type Experiences = InferType<typeof query>
-
 async function getExperiences() {
   return runQuery(query)
 }
 
-const experiences: Experiences = await getExperiences()
+const experiences: ExperiencesProps[] = await getExperiences()
 ---
 
 <section class="flex flex-col items-start gap-6 pb-8 pt-6 md:py-10">
@@ -29,22 +31,30 @@ const experiences: Experiences = await getExperiences()
       {
         experiences.map((experience) => (
           <div class="gap-10 pb-10 last:pb-0 md:flex">
-            <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
-              {formatDate(experience.startDate, 'short', false)} -
-              {experience.endDate
-                ? formatDate(experience.endDate, 'short', false)
-                : 'Present'}
-            </p>
+            {(experience.startDate || experience.endDate) && (
+              <p class="pb-2 text-base text-muted-foreground md:w-1/4 md:pb-0">
+                {formatDate(experience.startDate, 'short', false)} -
+                {experience.endDate &&
+                  formatDate(experience.endDate, 'short', false)}
+                {!experience.endDateOrActive && 'Present'}
+              </p>
+            )}
             <div class="md:w-3/4">
-              <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
-                {experience.position}
-              </p>
-              <p class="pb-5 text-base font-medium leading-tight tracking-tight">
-                {experience.company}
-              </p>
-              <div class="text-justify text-base text-muted-foreground paragraph:inline  paragraph:hyphens-auto anchor:font-medium anchor:underline anchor:underline-offset-4 list:mb-0 list:mt-5 list:list-disc list:pl-6 listItem:my-2 listItem:pl-1.5   paragraph:sm:block [&>*+*]:sm:mb-4 [&>*:last-child]:sm:mb-0">
-                <PortableText portableText={experience.body} />
-              </div>
+              {experience.position && (
+                <p class="pb-2 text-xl font-semibold leading-tight tracking-tight">
+                  {experience.position}
+                </p>
+              )}
+              {experience.company && (
+                <p class="pb-5 text-base font-medium leading-tight tracking-tight">
+                  {experience.company}
+                </p>
+              )}
+              {experience.body && (
+                <div class="text-justify text-base text-muted-foreground paragraph:inline  paragraph:hyphens-auto anchor:font-medium anchor:underline anchor:underline-offset-4 list:mb-0 list:mt-5 list:list-disc list:pl-6 listItem:my-2 listItem:pl-1.5   paragraph:sm:block [&>*+*]:sm:mb-4 [&>*:last-child]:sm:mb-0">
+                  <PortableText portableText={experience.body} />
+                </div>
+              )}
             </div>
           </div>
         ))

@@ -89,6 +89,8 @@ export type SingleProjectsProps = TypeFromSelection<
   typeof projectSingleSelection
 >
 
+export type ExperiencesProps = TypeFromSelection<typeof experienceSelection>
+
 export const runQuery = makeSafeQueryRunner(
   (query, params: Record<string, unknown> = {}) =>
     sanityClient.fetch(query, params),
