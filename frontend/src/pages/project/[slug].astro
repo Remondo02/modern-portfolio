@@ -10,11 +10,10 @@ import {
   runQuery,
   type SingleProjectsProps,
 } from '@/lib/project'
+import { metaDescriptionSlice } from '@/lib/utils'
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 import { q } from 'groqd'
 import { ExternalLink, Github } from 'lucide-react'
-
-import { metaDescriptionSlice } from '@/lib/utils'
 
 export const getStaticPaths = (async () => {
   async function getProjects() {
@@ -60,11 +59,11 @@ export const prerender = true
           </p>
         </div>
       </div>
-      <article
+      <div
         class="pb-8 text-justify text-base text-muted-foreground paragraph:hyphens-auto anchor:font-medium anchor:underline anchor:underline-offset-4 list:mb-0 list:mt-5 list:list-disc list:pl-6 listItem:my-2 listItem:pl-1.5"
       >
         <PortableText portableText={project.body} />
-      </article>
+      </div>
       <div class="mb-8 flex gap-2">
         {
           project.projectLink && (
