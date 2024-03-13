@@ -7,8 +7,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate, metaDescriptionSlice } from '@/lib/utils'
 import { runQuery } from '@/sanity'
 import {
-  projectSingleSelection,
-  type SingleProjectsProps,
+  singleProjectSelection,
+  type SingleProject,
 } from '@/sanity/projects'
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 import { q } from 'groqd'
@@ -17,10 +17,10 @@ import { ExternalLink, Github } from 'lucide-react'
 export const getStaticPaths = (async () => {
   async function getProjects() {
     return runQuery(
-      q('*').filter("_type == 'project'").grab(projectSingleSelection),
+      q('*').filter("_type == 'project'").grab(singleProjectSelection),
     )
   }
-  const projects: SingleProjectsProps[] = await getProjects()
+  const projects: SingleProject[] = await getProjects()
 
   return projects.map((project) => {
     return {

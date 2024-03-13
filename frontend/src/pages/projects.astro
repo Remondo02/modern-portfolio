@@ -2,19 +2,19 @@
 import PageProjectCard from '@/components/PageProjectCard.astro'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { runQuery } from '@/sanity'
-import { projectPageSelection, type PageProjectsProps } from '@/sanity/projects'
+import { pageProjectSelection, type PageProject } from '@/sanity/projects'
 import { q } from 'groqd'
 
 async function getProjects() {
   return runQuery(
     q('*')
       .filter("_type == 'project'")
-      .grab(projectPageSelection)
+      .grab(pageProjectSelection)
       .order('createdAt desc'),
   )
 }
 
-const projects: PageProjectsProps[] = await getProjects()
+const projects: PageProject[] = await getProjects()
 export const prerender = true
 ---
 

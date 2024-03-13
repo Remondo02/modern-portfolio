@@ -4,7 +4,7 @@ import { formatDate } from '@/lib/utils'
 import { runQuery } from '@/sanity'
 import {
   experienceSelection,
-  type ExperiencesProps,
+  type Experiences,
 } from '@/sanity/experiences'
 import { q } from 'groqd'
 
@@ -17,7 +17,7 @@ async function getExperiences() {
   return runQuery(query)
 }
 
-const experiences: ExperiencesProps[] = await getExperiences()
+const experiences: Experiences[] = await getExperiences()
 ---
 
 <section class="flex flex-col items-start gap-6 pb-8 pt-6 md:py-10">

@@ -17,10 +17,12 @@ export const commonProjectSelection = {
 } satisfies Selection
 
 export const pageProjectSelection = {
+  ...commonProjectSelection,
   excerpt: q.string(),
 } satisfies Selection
 
 export const singleProjectSelection = {
+  ...commonProjectSelection,
   ...bodySelection,
   projectLink: q.string().url().nullable(),
   repositoryLink: q.string().url().nullable(),
@@ -31,18 +33,8 @@ export const singleProjectSelection = {
   }).nullable(),
 } satisfies Selection
 
-export const projectPageSelection = {
-  ...commonProjectSelection,
-  ...pageProjectSelection,
-}
+export type PageProject = TypeFromSelection<typeof pageProjectSelection>
 
-export const projectSingleSelection = {
-  ...commonProjectSelection,
-  ...singleProjectSelection,
-}
-
-export type PageProjectsProps = TypeFromSelection<typeof projectPageSelection>
-
-export type SingleProjectsProps = TypeFromSelection<
-  typeof projectSingleSelection
+export type SingleProject = TypeFromSelection<
+  typeof singleProjectSelection
 >

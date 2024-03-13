@@ -10,4 +10,4 @@ export const experienceSelection = {
   endDateOrActive: q.boolean(),
 } satisfies Selection
 
-export type ExperiencesProps = TypeFromSelection<typeof experienceSelection>
+export type Experiences = TypeFromSelection<typeof experienceSelection>
