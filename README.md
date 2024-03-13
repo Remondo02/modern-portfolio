@@ -22,6 +22,7 @@ It's a rather simple portfolio, using JAMstack, but it features a lot of cool te
 - [Sanity](https://www.sanity.io) - Sanity is a platform that delivers content anywhere, gives you total composability, and syncs content with your business needs. Learn how Sanity powers content velocity, customer engagement, and innovation for digital leaders and brands.
 - [Tailwind](https://tailwindcss.com) - Tailwind CSS is a framework that lets you build any design, directly in your HTML, with classes like flex, pt-4, text-center and rotate-90. It is easy to customize, scalable, and has a large community of adopters and creators who love its speed, flexibility and design-first approach.
 - [Shadcn/ui](https://ui.shadcn.com) - shadcn/ui is a website that offers beautiful and customizable UI components that you can copy and paste into your apps. You can also access your GitHub repositories and issues from the website, and see the latest updates from other users.
+- [Resend](https://resend.com) - Resend is a tool that lets you send emails from your own domain with ease and reliability. It offers a simple interface, SDKs, webhooks, React templates, and multi-region support.
 
 
 ## Project structure
@@ -70,6 +71,6 @@ $PROJECT_ROOT
 
 ```
 
-## V2
+## Improvements
 
 **Blog** - I've wanted to add a blog page since the beginning, so it will probably happen soon.
