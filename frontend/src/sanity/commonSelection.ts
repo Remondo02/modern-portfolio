@@ -1,9 +1,9 @@
-import { q, type Selection } from 'groqd'
+import { q, type InferType } from 'groqd'
 
-export const bodySelection = {
-  body: q('body')
-    .filter()
-    .select({
-      '_type == "block"': ['{...}', q.contentBlock()],
-    }),
-} satisfies Selection
+export const bodySelection = q('body')
+  .filter()
+  .select({
+    '_type == "block"': ['{...}', q.contentBlock()],
+  })
+
+export type Body = InferType<typeof bodySelection>

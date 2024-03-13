@@ -6,10 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate, metaDescriptionSlice } from '@/lib/utils'
 import { runQuery } from '@/sanity'
-import {
-  singleProjectSelection,
-  type SingleProject,
-} from '@/sanity/projects'
+import { singleProjectSelection, type SingleProject } from '@/sanity/projects'
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro'
 import { q } from 'groqd'
 import { ExternalLink, Github } from 'lucide-react'
@@ -35,6 +32,7 @@ export const getStaticPaths = (async () => {
 export type Props = InferGetStaticPropsType<typeof getStaticPaths>
 
 const { ...project } = Astro.props
+
 export const prerender = true
 ---
 

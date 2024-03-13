@@ -2,7 +2,7 @@ import { q, type TypeFromSelection, type Selection } from 'groqd'
 import { bodySelection } from './commonSelection'
 
 export const experienceSelection = {
-  ...bodySelection,
+  body: bodySelection,
   position: q.string(),
   company: q.string(),
   startDate: ['startDate', q.string()],

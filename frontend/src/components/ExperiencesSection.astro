@@ -2,10 +2,7 @@
 import PortableText from '@/components/PortableText.astro'
 import { formatDate } from '@/lib/utils'
 import { runQuery } from '@/sanity'
-import {
-  experienceSelection,
-  type Experiences,
-} from '@/sanity/experiences'
+import { experienceSelection, type Experiences } from '@/sanity/experiences'
 import { q } from 'groqd'
 
 const query = q('*')

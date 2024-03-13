@@ -23,7 +23,7 @@ export const pageProjectSelection = {
 
 export const singleProjectSelection = {
   ...commonProjectSelection,
-  ...bodySelection,
+  body: bodySelection,
   projectLink: q.string().url().nullable(),
   repositoryLink: q.string().url().nullable(),
   projectImages: sanityImage('projectImages', {
@@ -35,6 +35,4 @@ export const singleProjectSelection = {
 
 export type PageProject = TypeFromSelection<typeof pageProjectSelection>
 
-export type SingleProject = TypeFromSelection<
-  typeof singleProjectSelection
->
+export type SingleProject = TypeFromSelection<typeof singleProjectSelection>
