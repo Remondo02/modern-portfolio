@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'portfolio',
   projectId: 'f3coktq6',
-  dataset: 'production',
+  dataset: import.meta.env.MODE === 'production' ? 'production' : 'development',
   plugins: [structureTool()],
   schema: {
     types: schemaTypes,

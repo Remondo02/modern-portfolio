@@ -16,7 +16,8 @@ export default defineConfig({
     }),
     sanityIntegration({
       projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
-      dataset: 'production',
+      dataset:
+      import.meta.env.MODE === 'production' ? 'production' : 'development',
       // Set useCdn to false if you're building statically.
       useCdn: false,
       token: import.meta.env.VITE_SANITY_TOKEN,
